@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Nubility Animation</string>
+    <string name="firstname">FirstName</string>
+    <string name="lastname">LastName</string>
+    <string name="firstname_here">Enter FirstName Here</string>
+    <string name="lastname_here">Enter LastName Here</string>
+    <string name="email">Email</string>
+    <string name="email_here">Enter Email Here</string>
+    <string name="password">Password</string>
+    <string name="facebook_app_id">2623639864557579</string>
+    <string name="fb_login_protocol_scheme">fb2623639864557579</string>
+
+    <string name="password_here">Enter Password Here</string>
+    <string name="confirm_password_here">Enter Confirm Password Here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

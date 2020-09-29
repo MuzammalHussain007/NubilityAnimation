@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/grandient_layout"
+    tools:context=".Fragments.Account_Detail_Fragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/user"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:id="@+id/user_detail_image"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Name"
+            android:textSize="20dp"
+            android:id="@+id/user_detail_firstname_text"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_detail_image"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorwhite"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:textSize="20dp"
+            android:id="@+id/user_detail_lastname_text"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_detail_firstname_text"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorwhite"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="20dp"
+            android:id="@+id/user_detail_email_text"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_detail_lastname_text"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorwhite"
+            />
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "123665589076",
+    "firebase_url": "https://nubility-animation.firebaseio.com",
+    "project_id": "nubility-animation",
+    "storage_bucket": "nubility-animation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123665589076:android:97b949b609a97c9c0bdec1",
+        "android_client_info": {
+          "package_name": "com.example.nubilityanimation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123665589076-matmhbh0a51pg9h9qif1n5g92qj3mm3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkM0xqed1n7Hg_Sl8uEMdnferjJvwRyZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123665589076-matmhbh0a51pg9h9qif1n5g92qj3mm3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

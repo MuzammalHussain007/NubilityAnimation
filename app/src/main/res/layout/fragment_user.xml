@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grandient_layout"
+    tools:context=".Fragments.UserFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/user_fragment_master"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/user"
+                app:civ_border_color="@color/colorYellow"
+                app:civ_border_width="2dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textColor="@color/colorwhite"
+                android:textSize="20dp"
+                android:id="@+id/user_fragment_name"
+                android:layout_marginTop="20px"
+                android:layout_gravity="center" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_fragment_account"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorwhite"
+                android:layout_marginLeft="50dp"
+                android:drawableLeft="@drawable/user_account"
+                android:drawableStart="@drawable/user_account"
+                android:text="Account"
+                android:textSize="25dp"
+                android:paddingTop="5dp"
+                android:drawablePadding="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorwhite"
+                android:id="@+id/user_fragment_notification"
+                android:drawableStart="@drawable/notification"
+                android:drawableLeft="@drawable/notification"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="50dp"
+                android:drawablePadding="5dp"
+                android:text="Notification"
+                android:textSize="25dp"
+                android:paddingTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorwhite"
+                android:id="@+id/user_fragment_setting"
+                android:drawableStart="@drawable/setting"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="50dp"
+                android:text="Setting"
+                android:textSize="25dp"
+                android:paddingTop="5dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/setting" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_fragment_help"
+                android:textColor="@color/colorwhite"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/help"
+                android:layout_marginLeft="50dp"
+                android:text="Help"
+                android:drawablePadding="10dp"
+                android:textSize="25dp"
+                android:paddingTop="5dp"
+                android:drawableLeft="@drawable/help" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_fragment_logout"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorwhite"
+                android:layout_marginLeft="50dp"
+                android:text="Logout"
+                android:drawableStart="@drawable/user_logout"
+                android:textSize="25dp"
+                android:paddingTop="10dp"
+                android:drawableLeft="@drawable/user_logout" />
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+</ScrollView>

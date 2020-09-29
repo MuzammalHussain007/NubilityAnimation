@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grandient_layout"
+        android:padding="30dp"
+        tools:context=".Registration.RegistrationActivity">
+        <TextView
+            android:id="@+id/registration_first_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Name"
+            android:textColor="@color/colorwhite"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/registration_first_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/registration_first_name_text_view"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_shape"
+            android:backgroundTint="@color/colorwhite"
+            android:hint="Enter First Name"
+            android:paddingLeft="20dp"
+            android:textColorHint="#C2185B" />
+
+        <TextView
+            android:id="@+id/registration_last_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_first_name_edit_text"
+            android:layout_marginTop="10dp"
+            android:text="Last  Name"
+            android:textColor="@color/colorwhite"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/registration_last_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/registration_last_name_text_view"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_shape"
+            android:backgroundTint="@color/colorwhite"
+            android:hint="Enter Last Name"
+            android:paddingLeft="20dp"
+            android:textColorHint="#C2185B" />
+
+        <TextView
+            android:id="@+id/registration_email_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_last_name_edit_text"
+            android:layout_marginTop="10dp"
+            android:text="Email Address"
+            android:textColor="@color/colorwhite"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/registration_email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/registration_email_text_view"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_shape"
+            android:backgroundTint="@color/colorwhite"
+            android:hint="Enter Email Here"
+            android:inputType="textWebEmailAddress"
+            android:paddingLeft="20dp"
+            android:textColorHint="#C2185B" />
+
+        <TextView
+            android:id="@+id/registration_password_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_email_edit_text"
+            android:layout_marginTop="10dp"
+            android:text="Password"
+            android:textColor="@color/colorwhite"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/registration_password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/registration_password_text_view"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_shape"
+            android:backgroundTint="@color/colorwhite"
+            android:hint="Enter Password Here"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:textColorHint="#C2185B" />
+
+        <Button
+            android:id="@+id/btn_registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_password_edit_text"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_gradient"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            android:textSize="20dp" />
+    </RelativeLayout>
+</ScrollView>
