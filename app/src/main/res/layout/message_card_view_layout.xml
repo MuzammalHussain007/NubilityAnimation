@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="20dp"
+    app:cardCornerRadius="20dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:id="@+id/message_CardView"
+    android:elevation="20dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grandient_layout"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sender Name"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:textColor="@color/colorwhite"
+            android:id="@+id/group_message_sender_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Message"
+            android:textColor="@color/colorwhite"
+            android:paddingLeft="30dp"
+            android:id="@+id/group_message_message_name"
+            android:layout_below="@+id/group_message_sender_name"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sending Time"
+            android:paddingRight="20dp"
+            android:textColor="@color/colorwhite"
+            android:id="@+id/group_message_time_stamp"
+            android:layout_below="@+id/group_message_message_name"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            />
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

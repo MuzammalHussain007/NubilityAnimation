@@ -10,4 +10,5 @@ public class ConstantClass {
     public static final int CAMERA_REQUEST_PERMISSION =3;
     public static final int GALLERY_REQUEST_CODE_USERDETAIL = 4;
     public static final int CAMERA_REQUEST_PERMISSION_USERDETAIL = 5;
+    public static final String GROUP_MESSAGE ="UserGroupMessage" ;
 }

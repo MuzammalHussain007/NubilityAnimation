@@ -6,12 +6,76 @@
     android:background="@drawable/grandient_layout"
     tools:context=".Fragments.CommunityGarageFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Community Garage"
-        android:textSize="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"/>
+        android:orientation="vertical"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/e_disscussion_image_view"
+                android:src="@drawable/diss"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-Disscussion"
+                android:textColor="@color/colorwhite"
+                android:id="@+id/community_garage_text_view"
+                android:textSize="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/fan_art_image_view"
+                android:src="@drawable/faan"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fan-Art"
+                android:textSize="30dp"
+                android:textColor="@color/colorwhite"
+                android:id="@+id/fan_art_text_view"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/e_store_image_view"
+                android:src="@drawable/shoping"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-Store"
+                android:textColor="@color/colorwhite"
+                android:textSize="30dp"
+                android:id="@+id/e_store_text_view"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>

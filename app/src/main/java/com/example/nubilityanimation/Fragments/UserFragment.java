@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.nubilityanimation.AdminSide.AdminHomeActivity;
 import com.example.nubilityanimation.Constant.ConstantClass;
+import com.example.nubilityanimation.ProfileDetail.ProfileDetailsActivity;
 import com.example.nubilityanimation.R;
 import com.example.nubilityanimation.Registration.LoginActivity;
 import com.example.nubilityanimation.SplashScreen;
@@ -61,16 +62,8 @@ public class UserFragment extends Fragment {
         user_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.user_fragment_master,new Account_Detail_Fragment()).commit();
-                mCircleImageView.setVisibility(v.GONE);
-                user_name.setVisibility(v.GONE);
-                user_account.setVisibility(v.GONE);
-                user_help.setVisibility(v.GONE);
-                user_notification.setVisibility(v.GONE);
-                user_setting.setVisibility(v.GONE);
-                user_logout.setVisibility(v.GONE);
+               startActivity(new Intent(getActivity().getApplicationContext(), ProfileDetailsActivity.class));
+               getActivity().finish();
             }
         });
         user_logout.setOnClickListener(new View.OnClickListener() {
