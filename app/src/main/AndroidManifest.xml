@@ -19,8 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FanArt.CreatePostActivity"></activity>
-        <activity android:name=".FanArt.DisplayPost" />
+        <activity android:name=".FanArt.DisplayPostActivity"></activity>
+        <activity android:name=".FanArt.CreatePostActivity" />
         <activity android:name=".Chat.GroupMessageActivity" />
         <activity android:name=".ProfileDetail.ProfileDetailsActivity" />
         <activity android:name=".Registration.PictureUpload" />

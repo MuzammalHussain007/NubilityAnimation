@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FanArt.DisplayPost">
+    android:background="@drawable/grandient_layout"
+    tools:context=".FanArt.DisplayPostActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/display_post_recyclarView"
+        android:paddingLeft="20dp"/>
 
 </RelativeLayout>

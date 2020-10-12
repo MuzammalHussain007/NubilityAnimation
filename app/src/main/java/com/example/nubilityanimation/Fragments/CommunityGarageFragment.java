@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nubilityanimation.Chat.GroupMessageActivity;
-import com.example.nubilityanimation.FanArt.DisplayPost;
+import com.example.nubilityanimation.FanArt.DisplayPostActivity;
 import com.example.nubilityanimation.R;
 
 
@@ -37,7 +37,7 @@ public class CommunityGarageFragment extends Fragment {
         fanart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity().getApplicationContext(), DisplayPost.class));
+                startActivity(new Intent(getActivity().getApplicationContext(), DisplayPostActivity.class));
                 getActivity().finish();
             }
         });
