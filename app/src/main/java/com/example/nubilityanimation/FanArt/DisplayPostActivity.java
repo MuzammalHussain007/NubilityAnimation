@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.nubilityanimation.Adapter.PostAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
@@ -23,9 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +31,9 @@ public class DisplayPostActivity extends AppCompatActivity {
     private CardView mCardView;
     private List<PostItem> mPostItems;
     private DatabaseReference mReference;
+    private List<String> postidList = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class DisplayPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_post);
         init();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(DisplayPostActivity.this));
+
         mReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

@@ -1,15 +1,12 @@
 package com.example.nubilityanimation.Adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,20 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.nubilityanimation.Constant.ConstantClass;
+import com.example.nubilityanimation.FanArt.CommentActivity;
 import com.example.nubilityanimation.Modal.PostItem;
-import com.example.nubilityanimation.Modal.User;
+import com.example.nubilityanimation.Modal.PostReaction;
 import com.example.nubilityanimation.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,21 +33,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
     private List<PostItem> mPostItems;
     private Context mContext;
     private boolean isLike=false;
-    private DatabaseReference mReference,userPost;
-    private SharedPreferences mSharedPreferences;
-    private String id;
+    private DatabaseReference userPost;
+    private FirebaseAuth mAuth;
+    private String postid;
+
 
 
     public PostAdapter(List<PostItem> postItems, Context context) {
         mPostItems = postItems;
         mContext = context;
+        mAuth=FirebaseAuth.getInstance();
+        userPost=FirebaseDatabase.getInstance().getReference(ConstantClass.POSTREACTION);
 
-        mSharedPreferences = context.getSharedPreferences(ConstantClass.MYPREFERENCE,Context.MODE_PRIVATE);
-        userPost=FirebaseDatabase.getInstance().getReference(ConstantClass.USER_POST);
-        mReference=FirebaseDatabase.getInstance().getReference(ConstantClass.USER_POST);
+
     }
-
-
 
     @NonNull
     @Override
@@ -66,14 +59,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
     @Override
     public void onBindViewHolder(@NonNull final PostHolder holder, final int position) {
         final PostItem postItem=mPostItems.get(position);
-        holder.username.setText(postItem.getUsername());
+        holder.username.setText(postItem.getPostid());
         holder.post_text.setText(postItem.getPostdescription());
         if (postItem.getUserimage().isEmpty())
         {
-              Glide.with(mContext)
-                      .load(R.drawable.user)
-                      .fitCenter()
-                      .into(holder.mCircleImageView);
+            Glide.with(mContext)
+                    .load(R.drawable.user)
+                    .fitCenter()
+                    .into(holder.mCircleImageView);
         }
         else
         {
@@ -105,17 +98,57 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
                 {
                     holder.like.setImageResource(R.drawable.user_unlike_image);
                     isLike=false;
-
-
-
-
+                    String  name = holder.id=postItem.getPostid();
+                    userPost.child(name).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(new PostReaction("Like"));
                 }
                 else if (isLike==false)
                 {
                     holder.like.setImageResource(R.drawable.user_like_image);
                     isLike=true;
                 }
+            }
+        });
+        userPost.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                     String status = snapshot.child(mAuth.getCurrentUser().getUid()).child("imageStatus").getValue().toString();
+                     if (status.isEmpty())
+                     {
+                         holder.like.setImageResource(R.drawable.user_like_image);
+                     }
+                     else
+                     {
+                         holder.like.setImageResource(R.drawable.user_unlike_image);
+                     }
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(mContext, CommentActivity.class);
+               postid=holder.id=postItem.getPostid();
+              intent.putExtra("postid",postid);
+                mContext.startActivity(intent);
             }
         });
 
@@ -127,11 +160,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
         return mPostItems.size();
     }
 
+
     public class PostHolder extends RecyclerView.ViewHolder
     {
         private ImageView mImageView,like,comment;
         private CircleImageView mCircleImageView;
         private TextView username,post_text;
+        private String id;
 
         public PostHolder(@NonNull View itemView) {
             super(itemView);

@@ -51,6 +51,9 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
    // like button animation
     implementation 'com.jackandphantom.android:androidlikebutton:1.2.0'
+   // Firebase ui Dependency
+
+    implementation 'com.firebaseui:firebase-ui-database:6.3.0'
 
 
 

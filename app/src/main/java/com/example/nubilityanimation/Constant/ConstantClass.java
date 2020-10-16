@@ -1,5 +1,7 @@
 package com.example.nubilityanimation.Constant;
 
+import org.w3c.dom.Comment;
+
 public class ConstantClass {
     public static final String DATABSENAME = "User Information";
 
@@ -15,5 +17,6 @@ public class ConstantClass {
     public static final String USERPOSTIMAGE ="UserPostImage/" ;
     public static final String POSTREACTION ="UserPostReaction" ;
     public static final String MYPREFERENCE ="Preference" ;
+    public static final String USERCOMMENT ="User Comment";
     public static String postReaction="PostReaction";
 }

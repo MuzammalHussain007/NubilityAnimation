@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grandient_layout"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/user"
+            android:id="@+id/user_comment_id"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="20dp"
+            android:text="User Name"
+            android:id="@+id/user_comment_user_name"
+            android:textColor="@color/colorwhite"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:textColor="@color/colorwhite"
+            android:id="@+id/comment_user_text"
+            android:layout_below="@id/user_comment_user_name"
+            android:layout_marginLeft="110dp"
+            android:text=""
+            android:layout_marginTop="15dp"/>
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

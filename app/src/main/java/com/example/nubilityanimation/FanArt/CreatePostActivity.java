@@ -249,6 +249,7 @@ public class CreatePostActivity extends AppCompatActivity {
                                      String name = snapshot.child("firstname").getValue().toString()+" "+ snapshot.child("pastname").getValue().toString();
                                      String img =snapshot.child("image").getValue().toString();
                                      postid=createpostreference.push().getKey();
+                                     mEditor.putString("post",postid).commit();
                                      createpostreference.child(postid).setValue(new PostItem(postid,mEditText.getText().toString(),uri.toString(),name,img));
                                      mProgressDialog.dismiss();
                                      mEditText.setText("");
@@ -261,21 +262,7 @@ public class CreatePostActivity extends AppCompatActivity {
 
                                 }
                             });
-                            userReference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                                    {
-                                        String key = dataSnapshot.getKey();
-                                        Toast.makeText(getApplicationContext(),""+key,Toast.LENGTH_SHORT).show();
-                                    }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
 
 
                         }
