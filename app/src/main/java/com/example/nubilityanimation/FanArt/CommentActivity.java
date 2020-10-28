@@ -1,11 +1,13 @@
 package com.example.nubilityanimation.FanArt;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Modal.UserComment;
 import com.example.nubilityanimation.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,23 +35,35 @@ public class CommentActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private EditText mEditText;
     private List<UserComment> mUserComments=new ArrayList<>();
-    String name ,image ,id;
+    String name ,image ,id,commentid;
+
+   
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        commentReference.addValueEventListener(new ValueEventListener() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment);
+        init();
+        commentReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                {
-                    if (dataSnapshot!=null)
-                    {
-                        UserComment userComment = dataSnapshot.getValue(UserComment.class);
-                        mUserComments.add(userComment);
-                    }
-                    mRecyclerView.setAdapter(new CommentAdapter(mUserComments,CommentActivity.this));
-                }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                UserComment userComment = snapshot.getValue(UserComment.class);
+                mUserComments.add(userComment);
+                mRecyclerView.setAdapter(new CommentAdapter(mUserComments,CommentActivity.this));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
 
@@ -57,15 +72,7 @@ public class CommentActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment);
-        init();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
-        mRecyclerView.setAdapter(new CommentAdapter(mUserComments,CommentActivity.this));
         userReference.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,7 +97,7 @@ public class CommentActivity extends AppCompatActivity {
                 {
                     Bundle intent= getIntent().getExtras();
                     id = intent.getString("postid");
-                    String commentid = commentReference.push().getKey();
+                    commentid = commentReference.push().getKey();
                     commentReference.child(commentid).setValue(new UserComment(commentid,name,image,mEditText.getText().toString()));
 
                     mEditText.setText("");
@@ -99,8 +106,6 @@ public class CommentActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void init() {

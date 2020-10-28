@@ -18,5 +18,7 @@ public class ConstantClass {
     public static final String POSTREACTION ="UserPostReaction" ;
     public static final String MYPREFERENCE ="Preference" ;
     public static final String USERCOMMENT ="User Comment";
+    public static final String USERVIDEO ="UserVideo" ;
+    public static final String USERVIDEOFOLDER ="UserVideoThumbnail/" ;
     public static String postReaction="PostReaction";
 }

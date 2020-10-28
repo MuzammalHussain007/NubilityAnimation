@@ -2,11 +2,19 @@ package com.example.nubilityanimation.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +33,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -59,7 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
     @Override
     public void onBindViewHolder(@NonNull final PostHolder holder, final int position) {
         final PostItem postItem=mPostItems.get(position);
-        holder.username.setText(postItem.getPostid());
+        holder.username.setText(postItem.getUsername());
         holder.post_text.setText(postItem.getPostdescription());
         if (postItem.getUserimage().isEmpty())
         {
@@ -89,59 +106,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
                     .fitCenter()
                     .into(holder.mImageView);
         }
-        isLike=true;
-        holder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                if (isLike==true)
-                {
-                    holder.like.setImageResource(R.drawable.user_unlike_image);
-                    isLike=false;
-                    String  name = holder.id=postItem.getPostid();
-                    userPost.child(name).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(new PostReaction("Like"));
-                }
-                else if (isLike==false)
-                {
-                    holder.like.setImageResource(R.drawable.user_like_image);
-                    isLike=true;
-                }
-            }
-        });
-        userPost.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                     String status = snapshot.child(mAuth.getCurrentUser().getUid()).child("imageStatus").getValue().toString();
-                     if (status.isEmpty())
-                     {
-                         holder.like.setImageResource(R.drawable.user_like_image);
-                     }
-                     else
-                     {
-                         holder.like.setImageResource(R.drawable.user_unlike_image);
-                     }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +117,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
             }
         });
 
+        holder.download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+            }
+        });
     }
 
     @Override
@@ -163,19 +134,40 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
 
     public class PostHolder extends RecyclerView.ViewHolder
     {
-        private ImageView mImageView,like,comment;
+        private ImageView mImageView,like,comment ,download;
         private CircleImageView mCircleImageView;
         private TextView username,post_text;
-        private String id;
+        private String id,strimage;
 
         public PostHolder(@NonNull View itemView) {
             super(itemView);
             mImageView=itemView.findViewById(R.id.user_post_image_image);
+            download=itemView.findViewById(R.id.download_image);
             mCircleImageView=itemView.findViewById(R.id.user_post_image);
-            like=itemView.findViewById(R.id.user_post_like_button);
             comment=itemView.findViewById(R.id.user_post_commen);
             post_text=itemView.findViewById(R.id.user_post_text);
             username=itemView.findViewById(R.id.user_post_name);
+        }
+    }
+
+    public class DownloadTask extends AsyncTask<URL,Integer,Bitmap>
+
+    {
+
+        @Override
+        protected Bitmap doInBackground(URL... urls) {
+            URL url = urls[0];
+            HttpURLConnection connection = null;
+            try{
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream inputStream = connection.getInputStream();
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+                return BitmapFactory.decodeStream(bufferedInputStream);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }

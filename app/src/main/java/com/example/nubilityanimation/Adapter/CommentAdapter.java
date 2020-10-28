@@ -40,6 +40,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     public void onBindViewHolder(@NonNull CommentHolder holder, int position) {
         UserComment userComment = mUserComments.get(position);
         holder.username.setText(userComment.getUsername());
+        if (userComment.getUserImage().isEmpty())
+        {
+            Glide.with(mContext)
+                    .load(R.drawable.user)
+                    .into(holder.mCircleImageView);
+        }
+        else
+        {
+            Glide.with(mContext)
+                    .load(userComment.getUserImage())
+                    .into(holder.mCircleImageView);
+        }
+
+        holder.user_text.setText(userComment.getCommentTxt());
 
 
 
@@ -54,7 +68,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     public class CommentHolder extends RecyclerView.ViewHolder {
         private CircleImageView mCircleImageView;
         private TextView username,user_text;
-        private String post;
+
 
         public CommentHolder(@NonNull View itemView) {
             super(itemView);

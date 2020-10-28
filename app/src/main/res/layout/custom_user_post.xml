@@ -60,15 +60,6 @@
             android:layout_below="@+id/user_post_text"
             android:layout_marginTop="20dp"
             />
-          <de.hdodenhof.circleimageview.CircleImageView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/user_post_like_button"
-              android:layout_marginTop="10dp"
-              android:layout_below="@+id/user_post_image_image"
-              android:layout_marginLeft="40dp"
-              android:src="@drawable/user_like_image"/>
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,26 +68,16 @@
             android:src="@drawable/user_post_comment"
             android:layout_below="@+id/user_post_image_image"
             android:layout_marginLeft="90dp"/>
-
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/user_post_comment_count"
+            android:id="@+id/download_image"
+            android:src="@drawable/download_image"
             android:layout_below="@+id/user_post_image_image"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="300dp"
-            android:text="count"
-            android:textColor="@color/colorwhite"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Like Count"
-            android:id="@+id/user_like_count"
-            android:layout_below="@id/user_post_image_image"
-            android:layout_marginLeft="300dp"
-            android:textColor="@color/colorwhite"
-            />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="300dp"/>
+
+
 
 
 
