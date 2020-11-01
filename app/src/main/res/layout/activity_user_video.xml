@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/grandient_layout"
+    android:layout_height="match_parent"
+    tools:context=".FragmentImplementation.UserVideoActivity">
+
+
+    <RelativeLayout android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/cardview_dark_background"
+            android:id="@+id/userVideoView"
+            android:layout_margin="2dp"/>
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="80dp"
+            android:id="@+id/video_start_progressbar"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/userVideoView"
+            android:id="@+id/video_rating_number"
+            android:text=""
+            android:textSize="40dp"
+            android:textColor="@color/colorwhite"
+            android:layout_marginTop="10dp"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/rating_id"
+            android:numStars="4"
+            android:progressTint="@color/colorYellow"
+            android:stepSize="0.25"
+
+            android:layout_below="@+id/video_rating_number"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_similar"
+            android:text="Similar"
+            android:textSize="30dp"
+            android:textColor="@color/colorwhite"
+            android:layout_below="@id/rating_id"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_video_recyclarView"
+            android:layout_below="@+id/user_similar"
+            android:layout_margin="10dp"/>
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

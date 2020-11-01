@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.nubilityanimation.Interface.RecyclarViewInterface;
 import com.example.nubilityanimation.Modal.UserVideoThumbnail;
 import com.example.nubilityanimation.R;
 
@@ -22,10 +24,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserVideoAdapter extends RecyclerView.Adapter<UserVideoAdapter.UserVideoHolder>  {
     private List<UserVideoThumbnail> mThumbnails ;
     private Context mContext;
+    private RecyclarViewInterface mRecyclarViewInterface;
 
-    public UserVideoAdapter(List<UserVideoThumbnail> thumbnails, Context context) {
+    public UserVideoAdapter(List<UserVideoThumbnail> thumbnails, Context context, RecyclarViewInterface recyclarViewInterface) {
         mThumbnails = thumbnails;
         mContext = context;
+        mRecyclarViewInterface = recyclarViewInterface;
     }
 
     @NonNull
@@ -40,17 +44,17 @@ public class UserVideoAdapter extends RecyclerView.Adapter<UserVideoAdapter.User
     @Override
     public void onBindViewHolder(@NonNull UserVideoHolder holder, int position) {
         UserVideoThumbnail userVideoThumbnail = mThumbnails.get(position);
-        holder.mTextView.setText(userVideoThumbnail.getName());
+        holder.mTextView.setText(userVideoThumbnail.getThumbnailName());
 
-        if (userVideoThumbnail.getPicURL().isEmpty())
+        if (userVideoThumbnail.getPictureURL().isEmpty())
         {
             Glide.with(mContext)
-                    .load(R.drawable.user).into(holder.mCircleImageView);
+                    .load(R.drawable.user).into(holder.mImageView);
         }
         else
         {
             Glide.with(mContext)
-                    .load(userVideoThumbnail.getPicURL()).into(holder.mCircleImageView);
+                    .load(userVideoThumbnail.getPictureURL()).into(holder.mImageView);
         }
     }
 
@@ -60,13 +64,19 @@ public class UserVideoAdapter extends RecyclerView.Adapter<UserVideoAdapter.User
     }
 
     public class UserVideoHolder extends RecyclerView.ViewHolder {
-        private CircleImageView mCircleImageView;
+        private ImageView mImageView;
         private TextView mTextView;
 
         public UserVideoHolder(@NonNull View itemView) {
             super(itemView);
             mTextView=itemView.findViewById(R.id.user_video_thumnail_view);
-            mCircleImageView=itemView.findViewById(R.id.video_thumbnail_image);
+            mImageView=itemView.findViewById(R.id.video_thumbnail_image);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mRecyclarViewInterface.onClickListner(getAdapterPosition());
+                }
+            });
         }
     }
 }

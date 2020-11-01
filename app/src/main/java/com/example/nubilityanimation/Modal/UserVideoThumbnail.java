@@ -1,37 +1,48 @@
 package com.example.nubilityanimation.Modal;
 
 public class UserVideoThumbnail {
-    private String id,name,picURL;
+   private String thumbnailid,thumbnailName,pictureURL,videoURL;
 
-    public UserVideoThumbnail(String id, String name, String picURL) {
-        this.id = id;
-        this.name = name;
-        this.picURL = picURL;
+    public String getThumbnailid() {
+        return thumbnailid;
     }
     public UserVideoThumbnail()
-    {}
+    {
 
-    public String getId() {
-        return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setThumbnailid(String thumbnailid) {
+        this.thumbnailid = thumbnailid;
     }
 
-    public String getName() {
-        return name;
+    public String getThumbnailName() {
+        return thumbnailName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setThumbnailName(String thumbnailName) {
+        this.thumbnailName = thumbnailName;
     }
 
-    public String getPicURL() {
-        return picURL;
+    public String getPictureURL() {
+        return pictureURL;
     }
 
-    public void setPicURL(String picURL) {
-        this.picURL = picURL;
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
+
+    public String getVideoURL() {
+        return videoURL;
+    }
+
+    public void setVideoURL(String videoURL) {
+        this.videoURL = videoURL;
+    }
+
+    public UserVideoThumbnail(String thumbnailid, String thumbnailName, String pictureURL, String videoURL) {
+        this.thumbnailid = thumbnailid;
+        this.thumbnailName = thumbnailName;
+        this.pictureURL = pictureURL;
+        this.videoURL = videoURL;
     }
 }

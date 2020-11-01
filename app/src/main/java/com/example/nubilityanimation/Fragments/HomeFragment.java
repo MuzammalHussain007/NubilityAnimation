@@ -1,5 +1,6 @@
 package com.example.nubilityanimation.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import com.example.nubilityanimation.Adapter.PostAdapter;
 import com.example.nubilityanimation.Adapter.UserVideoAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.FanArt.DisplayPostActivity;
+import com.example.nubilityanimation.FragmentImplementation.UserVideoActivity;
+import com.example.nubilityanimation.Interface.RecyclarViewInterface;
 import com.example.nubilityanimation.Modal.PostItem;
 import com.example.nubilityanimation.Modal.UserVideoThumbnail;
 import com.example.nubilityanimation.R;
@@ -31,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements RecyclarViewInterface {
     private RecyclerView mRecyclerView;
     private DatabaseReference mReference;
     private UserVideoAdapter mUserVideoAdapter;
@@ -54,7 +57,7 @@ public class HomeFragment extends Fragment {
 
                 UserVideoThumbnail userVideoThumbnail = snapshot.getValue(UserVideoThumbnail.class);
                 mThumbnails.add(userVideoThumbnail);
-                mRecyclerView.setAdapter(new UserVideoAdapter(mThumbnails,getActivity()));
+                mRecyclerView.setAdapter(new UserVideoAdapter(mThumbnails,getActivity(),HomeFragment.this));
 
             }
 
@@ -82,5 +85,21 @@ public class HomeFragment extends Fragment {
 
 
         return v;
+    }
+
+    @Override
+    public void onClickListner(int position) {
+
+        UserVideoThumbnail userVideoThumbnail = mThumbnails.get(position);
+        String id = userVideoThumbnail.getThumbnailid();
+        String url = userVideoThumbnail.getVideoURL();
+        String img = userVideoThumbnail.getPictureURL();
+        Intent intent = new Intent(getActivity().getApplicationContext(), UserVideoActivity.class);
+        intent.putExtra("user_video",id);
+        intent.putExtra("vidURL",url);
+        intent.putExtra("picURL",img);
+        getActivity().startActivity(intent);
+
+
     }
 }

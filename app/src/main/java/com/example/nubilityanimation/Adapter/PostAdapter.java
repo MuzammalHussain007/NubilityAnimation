@@ -1,5 +1,6 @@
 package com.example.nubilityanimation.Adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.PrecomputedText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +45,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -75,6 +78,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull final PostHolder holder, final int position) {
+
         final PostItem postItem=mPostItems.get(position);
         holder.username.setText(postItem.getUsername());
         holder.post_text.setText(postItem.getPostdescription());
@@ -96,14 +100,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
         {
             Glide.with(mContext)
                     .load(R.drawable.user)
-                    .fitCenter()
                     .into(holder.mImageView);
         }
         else
         {
             Glide.with(mContext)
                     .load(postItem.getPostimage())
-                    .fitCenter()
                     .into(holder.mImageView);
         }
 
@@ -116,15 +118,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
                 mContext.startActivity(intent);
             }
         });
-
         holder.download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                AsyncTask task = new DownloadClass().execute(postItem.getPostimage());
             }
         });
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -150,24 +153,76 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
         }
     }
 
-    public class DownloadTask extends AsyncTask<URL,Integer,Bitmap>
-
+    public class DownloadClass extends AsyncTask<String,String,Bitmap>
     {
+        public ProgressDialog mProgressDialog;
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            FileOutputStream fileOutputStream=null;
+            if (bitmap!=null)
+            {
+                mProgressDialog.dismiss();
+                File sdcar = Environment.getExternalStorageDirectory();
+                File directory = new File(sdcar.getAbsolutePath(),"/NobilityAnimation");
+                    directory.mkdir();
+                    String filename = String.format("%d.jpg",System.currentTimeMillis());
+                    File out = new File (directory,filename);
+                try {
+                    fileOutputStream = new FileOutputStream(out);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,fileOutputStream);
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                intent.setData(Uri.fromFile(out));
+                mContext.sendBroadcast(intent);
+
+            }
+            else
+            {
+                mProgressDialog.show();
+            }
+
+        }
 
         @Override
-        protected Bitmap doInBackground(URL... urls) {
-            URL url = urls[0];
-            HttpURLConnection connection = null;
-            try{
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-                InputStream inputStream = connection.getInputStream();
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-                return BitmapFactory.decodeStream(bufferedInputStream);
-            }catch(IOException e){
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressDialog = new ProgressDialog(mContext);
+            mProgressDialog.setMessage("Plz Wait ...Its Downloading");
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.show();
+
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap bmimg=null;
+            try {
+                URL url = new URL(strings[0]);
+                InputStream inputStream=null;
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+                inputStream = httpURLConnection.getInputStream();
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig= Bitmap.Config.RGB_565;
+                 bmimg = BitmapFactory.decodeStream(inputStream,null,options);
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return bmimg;
+
         }
     }
 }

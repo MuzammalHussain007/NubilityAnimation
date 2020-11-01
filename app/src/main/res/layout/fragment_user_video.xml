@@ -13,6 +13,7 @@
         android:id="@+id/admin_side_video_image"
         android:src="@drawable/user"/>
 
+
        <EditText
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -37,6 +38,14 @@
         android:layout_below="@+id/admin_video_name"
         android:layout_marginTop="10dp"
         android:textAllCaps="false"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/video_link"/>
 
 
 
