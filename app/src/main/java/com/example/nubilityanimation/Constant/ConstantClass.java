@@ -21,6 +21,6 @@ public class ConstantClass {
     public static final String USERVIDEO ="UserVideo" ;
     public static final String USERVIDEOFOLDER ="UserVideoThumbnail/" ;
     public static final String USERWATCHINGVIDEO ="User Watching Video/" ;
-    public static final String USERREVIEW ="User Review" ;
-    public static String postReaction="PostReaction";
+    public static final String USERREVIEW ="User Review" ; // no use yet
+
 }

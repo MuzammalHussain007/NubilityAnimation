@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:background="#CC000000">
+    <com.google.android.exoplayer2.ui.DefaultTimeBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/exo_progress"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        app:unplayed_color="#CC000000"
+        app:buffered_color="@color/colorwhite"
+        app:played_color="@color/colorYellow"
+        android:layout_marginLeft="10dp"
+
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:id="@+id/media_player_full_screen"
+        android:src="@drawable/ic_fullscreen"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:id="@+id/media_controller_anticlockwise"
+            android:src="@drawable/anticlockwise"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:id="@+id/media_controller_play_pause"
+            android:src="@drawable/play_btn"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:id="@+id/media_controller_clockwise"
+            android:src="@drawable/clockwise"/>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

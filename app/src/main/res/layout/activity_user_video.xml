@@ -13,9 +13,15 @@
     <RelativeLayout android:layout_height="match_parent"
         android:layout_width="match_parent">
 
-        <VideoView
+        <com.google.android.exoplayer2.ui.PlayerView
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            app:resize_mode="fill"
+            app:fastforward_increment="10000"
+            app:rewind_increment="10000"
+            app:show_timeout="5000"
+            app:use_controller="true"
+            app:controller_layout_id="@layout/custom_media_controller"
             android:background="@color/cardview_dark_background"
             android:id="@+id/userVideoView"
             android:layout_margin="2dp"/>

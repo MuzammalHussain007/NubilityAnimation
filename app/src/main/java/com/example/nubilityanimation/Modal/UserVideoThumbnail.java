@@ -1,7 +1,7 @@
 package com.example.nubilityanimation.Modal;
 
 public class UserVideoThumbnail {
-   private String thumbnailid,thumbnailName,pictureURL,videoURL;
+   private String thumbnailid,thumbnailName,pictureURL,videoURL,nofOFreview;
 
     public String getThumbnailid() {
         return thumbnailid;
@@ -39,10 +39,19 @@ public class UserVideoThumbnail {
         this.videoURL = videoURL;
     }
 
-    public UserVideoThumbnail(String thumbnailid, String thumbnailName, String pictureURL, String videoURL) {
+    public UserVideoThumbnail(String thumbnailid, String thumbnailName, String pictureURL, String videoURL, String nofOFreview) {
         this.thumbnailid = thumbnailid;
         this.thumbnailName = thumbnailName;
         this.pictureURL = pictureURL;
         this.videoURL = videoURL;
+        this.nofOFreview = nofOFreview;
+    }
+
+    public void setNofOFreview(String nofOFreview) {
+        this.nofOFreview = nofOFreview;
+    }
+
+    public String getNofOFreview() {
+        return nofOFreview;
     }
 }

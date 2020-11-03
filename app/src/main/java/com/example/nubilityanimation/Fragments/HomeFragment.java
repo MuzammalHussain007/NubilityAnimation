@@ -10,8 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.nubilityanimation.Adapter.PostAdapter;
@@ -28,6 +32,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -49,6 +54,7 @@ public class HomeFragment extends Fragment implements RecyclarViewInterface {
         View v= inflater.inflate(R.layout.fragment_home, container, false);
         mReference= FirebaseDatabase.getInstance().getReference(ConstantClass.USERVIDEO);
         mRecyclerView= v.findViewById(R.id.user_home_recyclarView);
+        setHasOptionsMenu(true);
         mThumbnails = new ArrayList<>();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         mReference.addChildEventListener(new ChildEventListener() {
@@ -100,6 +106,53 @@ public class HomeFragment extends Fragment implements RecyclarViewInterface {
         intent.putExtra("picURL",img);
         getActivity().startActivity(intent);
 
+
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.movie_search_view,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.user_movie_search :
+            {
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        firebaseSearch(newText);
+                        return true;
+                    }
+                });
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void firebaseSearch(String text)
+    {
+      List<UserVideoThumbnail> thumbnails = new ArrayList<>();
+        for (UserVideoThumbnail userVideoThumbnail : mThumbnails)
+        {
+           if (userVideoThumbnail.getThumbnailName().toLowerCase().contains(text.toLowerCase()))
+           {
+             thumbnails.add(userVideoThumbnail);
+           }
+        }
+         mUserVideoAdapter=new UserVideoAdapter(thumbnails,getActivity().getApplicationContext(),HomeFragment.this);
+        mRecyclerView.setAdapter(mUserVideoAdapter);
 
     }
 }

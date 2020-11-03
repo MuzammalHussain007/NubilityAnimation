@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".FragmentImplementation.UserVideoActivity"
-            android:configChanges="orientation|screenSize|layoutDirection">
+            android:configChanges="orientation|screenSize|layoutDirection|keyboardHidden">
             >
 
         </activity>
