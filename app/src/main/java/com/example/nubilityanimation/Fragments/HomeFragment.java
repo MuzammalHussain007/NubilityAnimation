@@ -1,6 +1,8 @@
 package com.example.nubilityanimation.Fragments;
 
+
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nubilityanimation.Adapter.PostAdapter;
@@ -27,13 +30,13 @@ import com.example.nubilityanimation.Interface.RecyclarViewInterface;
 import com.example.nubilityanimation.Modal.PostItem;
 import com.example.nubilityanimation.Modal.UserVideoThumbnail;
 import com.example.nubilityanimation.R;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,7 @@ public class HomeFragment extends Fragment implements RecyclarViewInterface {
     private DatabaseReference mReference;
     private UserVideoAdapter mUserVideoAdapter;
     private List<UserVideoThumbnail> mThumbnails;
+    private String id;
 
 
 
@@ -97,7 +101,7 @@ public class HomeFragment extends Fragment implements RecyclarViewInterface {
     public void onClickListner(int position) {
 
         UserVideoThumbnail userVideoThumbnail = mThumbnails.get(position);
-        String id = userVideoThumbnail.getThumbnailid();
+         id = userVideoThumbnail.getThumbnailid();
         String url = userVideoThumbnail.getVideoURL();
         String img = userVideoThumbnail.getPictureURL();
         Intent intent = new Intent(getActivity().getApplicationContext(), UserVideoActivity.class);
@@ -113,46 +117,42 @@ public class HomeFragment extends Fragment implements RecyclarViewInterface {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.movie_search_view,menu);
-    }
+        getActivity().getMenuInflater().inflate(R.menu.movie_search_view,menu);
+        MenuItem item = menu.findItem(R.id.user_movie_search);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setQueryHint("Search Here");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.user_movie_search :
-            {
-                SearchView searchView = (SearchView) item.getActionView();
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        firebaseSearch(newText);
-                        return true;
-                    }
-                });
-                break;
             }
-        }
-        return super.onOptionsItemSelected(item);
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                firbaseSearch(s);
+
+
+                return true;
+
+            }
+        });
+
+
+
     }
 
-    private void firebaseSearch(String text)
-    {
-      List<UserVideoThumbnail> thumbnails = new ArrayList<>();
-        for (UserVideoThumbnail userVideoThumbnail : mThumbnails)
+    private void firbaseSearch(String s) {
+        List<UserVideoThumbnail> searchItem = new ArrayList<>();
+        for (UserVideoThumbnail search : mThumbnails)
         {
-           if (userVideoThumbnail.getThumbnailName().toLowerCase().contains(text.toLowerCase()))
-           {
-             thumbnails.add(userVideoThumbnail);
-           }
+            if (search.getThumbnailName().toLowerCase().contains(s.toLowerCase()))
+            {
+                searchItem.add(search);
+            }
+            mUserVideoAdapter = new UserVideoAdapter(searchItem,getContext().getApplicationContext(),HomeFragment.this);
+            mRecyclerView.setAdapter(mUserVideoAdapter);
+            mUserVideoAdapter.notifyDataSetChanged();
         }
-         mUserVideoAdapter=new UserVideoAdapter(thumbnails,getActivity().getApplicationContext(),HomeFragment.this);
-        mRecyclerView.setAdapter(mUserVideoAdapter);
-
     }
 }

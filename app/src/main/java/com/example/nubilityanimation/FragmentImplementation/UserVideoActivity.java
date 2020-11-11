@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -243,24 +244,12 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
                     if (getSupportActionBar() != null){
                         getSupportActionBar().hide();
                     }
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mPlayerView.getLayoutParams();
-                    params.width = params.MATCH_PARENT;
-                    params.height = params.MATCH_PARENT;
-                    mPlayerView.setLayoutParams(params);
+
                     fulscreen = true;
                 }
                 else
                 {
-                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-                    if (getSupportActionBar() != null){
-                        getSupportActionBar().show();
-                    }
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mPlayerView.getLayoutParams();
-                    params.width = params.MATCH_PARENT;
-                    params.height = (int) (200 * getApplicationContext().getResources().getDisplayMetrics().density);
-                    mPlayerView.setLayoutParams(params);
+
                     fulscreen = false;
                 }
 

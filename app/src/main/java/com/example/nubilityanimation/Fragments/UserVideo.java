@@ -88,7 +88,7 @@ public class UserVideo extends Fragment {
                 else
                 {
                     String thumnailID=mReference.push().getKey();
-                    mReference.child(thumnailID).setValue(new UserVideoThumbnail(thumnailID,mText.getText().toString(),imgURL,videoURL,""));
+                    mReference.child(thumnailID).setValue(new UserVideoThumbnail(thumnailID,mText.getText().toString(),imgURL,videoURL,"0.0"));
                     mText.setText(" ");
                 }
 
