@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="true"
+    >
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/colorlorlightPink">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:src="@drawable/user"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/custom_product_image"
+            android:layout_height="80dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Title"
+            android:id="@+id/custom_product_title"
+            android:layout_below="@+id/custom_product_image"
+            android:textColor="@color/colorwhite"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:id="@+id/cuatom_product_stock"
+            android:layout_below="@+id/custom_product_title"
+            android:text="Stock:"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorwhite"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:id="@+id/custom_product_price"
+            android:layout_below="@+id/cuatom_product_stock"
+            android:text="Price:"
+            android:textColor="@color/colorwhite"
+            android:textSize="15dp"/>
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

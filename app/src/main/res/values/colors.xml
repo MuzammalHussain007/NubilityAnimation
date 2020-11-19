@@ -6,5 +6,9 @@
     <color name="colorBlack">#000000</color>
     <color name="colorwhite">#FFFFFF</color>
     <color name="colorYellow">#FFC107</color>
+    <color name="colorlorlightPink">#FFB6C1</color>
+    <color name="colorlorgrey">#808080</color>
+    <color name="lightYelow">#AEF7D560</color>
+
 
 </resources>

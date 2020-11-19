@@ -1,22 +1,21 @@
 package com.example.nubilityanimation.AdminSide;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.nubilityanimation.Adapter.AdminFragmentAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
+import com.example.nubilityanimation.Fragments.Add_Admin_User_Product_Fragment;
 import com.example.nubilityanimation.Fragments.UserVideo;
 import com.example.nubilityanimation.R;
 import com.example.nubilityanimation.Registration.LoginActivity;
-import com.example.nubilityanimation.UserSide.UserHomeActivity;
 import com.facebook.login.LoginManager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +35,8 @@ public class AdminHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
         connection();
         mAdminFragmentAdapter.addFragment(new UserVideo(),"UserVideo");
+        mAdminFragmentAdapter.addFragment(new Add_Admin_User_Product_Fragment(),"Add Product");
+
         mViewPager.setAdapter(mAdminFragmentAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }

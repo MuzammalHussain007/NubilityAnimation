@@ -19,11 +19,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FragmentImplementation.UserVideoActivity"
-            android:configChanges="orientation|screenSize|layoutDirection|keyboardHidden">
-            >
-
-        </activity>
+        <activity android:name=".FragmentImplementation.FavouriteUserActivity"></activity>
+        <activity android:name=".FragmentImplementation.WatchLaterActivity" />
+        <activity android:name=".E_Store.UserCartActivity" />
+        <activity android:name=".E_Store.Product_Sellar_Activity" />
+        <activity android:name=".E_Store.ProductViewActivity" />
+        <activity
+            android:name=".FragmentImplementation.UserVideoActivity"
+            android:configChanges="orientation|screenSize|layoutDirection|keyboardHidden"
+            android:parentActivityName=".UserSide.UserHomeActivity" />
         <activity android:name=".FanArt.CommentActivity" />
         <activity android:name=".FanArt.DisplayPostActivity" />
         <activity android:name=".FanArt.CreatePostActivity" />
@@ -42,6 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

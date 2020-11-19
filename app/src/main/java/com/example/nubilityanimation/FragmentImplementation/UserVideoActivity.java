@@ -1,51 +1,43 @@
 package com.example.nubilityanimation.FragmentImplementation;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.accessibility.AccessibilityViewCommand;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.drm.DrmStore;
-import android.media.Image;
-import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.DisplayMetrics;
-import android.view.MotionEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nubilityanimation.Adapter.UserCommentAdapter;
 import com.example.nubilityanimation.Adapter.UserVideoAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Interface.RecyclarViewInterface;
+import com.example.nubilityanimation.Modal.UserCommentVideo;
 import com.example.nubilityanimation.Modal.UserVideoThumbnail;
+import com.example.nubilityanimation.Modal.User_Watch_Later;
 import com.example.nubilityanimation.R;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
-import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
-import com.google.android.exoplayer2.SeekParameters;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -57,16 +49,13 @@ import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
-import com.google.android.exoplayer2.util.Util;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -74,14 +63,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class UserVideoActivity extends AppCompatActivity implements RecyclarViewInterface {
 
@@ -91,13 +74,17 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
     private SimpleExoPlayer mSimpleExoPlayer;
     private PlayerView mPlayerView ;
     private ImageView ful_screen,forword,backword,playpause;
-    private RatingBar mRatingBar;
     private RecyclerView mRecyclerView;
+    private RecyclerView commentshowRecycler;
     private TextView number;
     private UserVideoAdapter mUserVideoAdapter;
     private List<UserVideoThumbnail> mThumbnails;
-    private DatabaseReference mReference;
+    private DatabaseReference mReference,saveUserComment,userReference , mReferenceFavourite ,mReferenceWatchLator;
     private String id,ratingnumber,videoURLS,pictureURL;
+    private EditText send_comment;
+    private ImageView imageView;
+    private String username;
+    private List<UserCommentVideo> mUserComments;
 
     @Override
     protected void onPause() {
@@ -117,10 +104,140 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.share_video,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch(item.getItemId())
+        {
+            case R.id.ic_share:
+            {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserVideoActivity.this);
+                String list[] ={"Watch Later","Favourite"};
+                builder.setItems(list, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which)
+                        {
+                            case 0:
+                            {
+                                mReferenceWatchLator.child(id).setValue(new User_Watch_Later(id,videoURLS,pictureURL)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                         if (task.isSuccessful())
+                                         {
+                                             Toast.makeText(getApplicationContext(),"Video Shared Successfully",Toast.LENGTH_SHORT).show();
+                                         }
+                                    }
+                                });
+
+
+                                break;
+                            }
+                            case 1:
+                            {
+                                mReferenceFavourite.child(id).setValue(new User_Watch_Later(id,videoURLS,pictureURL)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful())
+                                        {
+                                            Toast.makeText(getApplicationContext(),"Video Shared Successfully",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    }
+                });
+                builder.create().show();
+               break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_video);
         init();
+        userReference.child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                username = snapshot.child("firstname").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String comment = send_comment.getText().toString();
+                if (comment=="")
+                {
+                    Toast.makeText(getApplicationContext(),"You can not send comment",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    String commentid= saveUserComment.push().getKey();
+                    UserCommentVideo userCommentVideo = new UserCommentVideo(commentid,id,comment,username,"0");
+                    saveUserComment.child(id).child(commentid).setValue(userCommentVideo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                            {
+                                send_comment.setText("");
+                            }
+
+                        }
+                    });
+
+                }
+            }
+        });
+        saveUserComment.child(id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                     UserCommentVideo userCommentVideo = snapshot.getValue(UserCommentVideo.class);
+                     mUserComments.add(userCommentVideo);
+                commentshowRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                commentshowRecycler.setAdapter(new UserCommentAdapter(getApplicationContext(),mUserComments));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Video Screen");
         LoadControl loadControl= new DefaultLoadControl();
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
@@ -223,15 +340,7 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
         });
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(final RatingBar ratingBar, float rating, boolean fromUser) {
-                ratingnumber = String.valueOf(rating);
-                number.setText(String.valueOf(rating));
-                savingUserRating();
 
-            }
-        });
 
         ful_screen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,6 +353,11 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
                     if (getSupportActionBar() != null){
                         getSupportActionBar().hide();
                     }
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mPlayerView.getLayoutParams();
+                    params.width = params.MATCH_PARENT;
+                    params.height = params.MATCH_PARENT;
+                    mPlayerView.setLayoutParams(params);
 
                     fulscreen = true;
                 }
@@ -283,61 +397,41 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
 
             }
         });
-        mReference.child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String n = snapshot.child("nofOFreview").getValue().toString();
-                mRatingBar.setRating(Float.valueOf(n).floatValue());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-
-
-
 
 
     }
 
-    private void savingUserRating() {
-        HashMap<String , Object> update = new HashMap<>();
-        update.put("nofOFreview",ratingnumber);
-        mReference.child(id).updateChildren(update).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-              if (task.isSuccessful())
-              {
-              }
-            }
-        });
-    }
+
 
     private void init() {
         Bundle intent= getIntent().getExtras();
-        id = intent.getString("user_video");
+        id = intent.getString("user_video");   // user video id
         videoURLS=intent.getString("vidURL");
         mReference= FirebaseDatabase.getInstance().getReference(ConstantClass.USERVIDEO);
         mRecyclerView= findViewById(R.id.user_video_recyclarView);
-        mRatingBar=findViewById(R.id.rating_id);
         mThumbnails=new ArrayList<>();
         mPlayerView=findViewById(R.id.userVideoView);
         mProgressBar=findViewById(R.id.video_start_progressbar);
-        number=findViewById(R.id.video_rating_number);
-        pictureURL=intent.getString("picURL");
+        pictureURL=intent.getString("picURL");  // video thumbnail URL
         forword=findViewById(R.id.media_controller_clockwise);
         backword=findViewById(R.id.media_controller_anticlockwise);
         playpause=findViewById(R.id.media_controller_play_pause);
         ful_screen = mPlayerView.findViewById(R.id.media_player_full_screen);
+        imageView=findViewById(R.id.send_message_icon);
+        send_comment=findViewById(R.id.user_comment_edit_text);
+        mUserComments= new ArrayList<>();
+        commentshowRecycler=findViewById(R.id.comment_view_recyclarView);
+        userReference=FirebaseDatabase.getInstance().getReference(ConstantClass.DATABSENAME);
+        mReferenceWatchLator=FirebaseDatabase.getInstance().getReference(ConstantClass.USERWATCHLATER);
+        mReferenceFavourite=FirebaseDatabase.getInstance().getReference(ConstantClass.USERFAVOURITE);
+        saveUserComment=FirebaseDatabase.getInstance().getReference(ConstantClass.SAVEUSERVIDEOCOMMENT);
+
     }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         mSimpleExoPlayer.setPlayWhenReady(false);
+
     }
 
     @Override
@@ -345,6 +439,7 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
         super.onStart();
         mProgressBar.setVisibility(View.VISIBLE);
     }
+
 
     @Override
     public void onClickListner(int position) {

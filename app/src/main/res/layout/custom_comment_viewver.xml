@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView app:cardElevation="10dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="true"
+    app:cardCornerRadius="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/lightYelow">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserName"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/custom_comment_username"
+
+            />
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/rating_id"
+            android:numStars="5"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            android:progressTint="@color/colorYellow"
+            android:stepSize="0.25"/>
+        <TextView
+            android:layout_width="250dp"
+            android:layout_below="@+id/custom_comment_username"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:inputType="textMultiLine"
+            android:textColor="@color/colorBlack"
+            android:text="Comment Text"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/user_custom_comment"
+            android:layout_marginTop="3dp"
+            android:textSize="15dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

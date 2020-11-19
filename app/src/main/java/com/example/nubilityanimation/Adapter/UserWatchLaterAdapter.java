@@ -11,34 +11,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.nubilityanimation.Interface.RecyclarViewInterface;
-import com.example.nubilityanimation.Modal.UserVideoThumbnail;
+import com.example.nubilityanimation.Modal.User_Watch_Later;
 import com.example.nubilityanimation.R;
 
 import java.util.List;
 
-public class UserVideoAdapter extends RecyclerView.Adapter<UserVideoAdapter.UserVideoHolder>  {
-    private List<UserVideoThumbnail> mThumbnails ;
-    private Context mContext;
-    private RecyclarViewInterface mRecyclarViewInterface;
+public class UserWatchLaterAdapter extends RecyclerView.Adapter<UserWatchLaterAdapter.UserWatchHolder> {
+     private List<User_Watch_Later> mUserWatchLaterList;
+     private Context mContext;
+     private RecyclarViewInterface mRecyclarViewInterface;
 
-    public UserVideoAdapter(List<UserVideoThumbnail> thumbnails, Context context, RecyclarViewInterface recyclarViewInterface) {
-        mThumbnails = thumbnails;
-        mContext = context;
-        mRecyclarViewInterface = recyclarViewInterface;
+    public UserWatchLaterAdapter(List<User_Watch_Later> mUserWatchLaterList, Context mContext, RecyclarViewInterface mRecyclarViewInterface) {
+        this.mUserWatchLaterList = mUserWatchLaterList;
+        this.mContext = mContext;
+        this.mRecyclarViewInterface = mRecyclarViewInterface;
     }
 
     @NonNull
     @Override
-    public UserVideoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UserWatchHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.custom_video_thumbnail,null);
-        return new UserVideoHolder(view);
+        return new UserWatchHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserVideoHolder holder, int position) {
-        UserVideoThumbnail userVideoThumbnail = mThumbnails.get(position);
-        if (userVideoThumbnail.getPictureURL().isEmpty())
+    public void onBindViewHolder(@NonNull UserWatchHolder holder, int position) {
+        User_Watch_Later user_watch_later= mUserWatchLaterList.get(position);
+
+        if (user_watch_later.getPictureURL().isEmpty())
         {
             Glide.with(mContext)
                     .load(R.drawable.user).into(holder.mImageView);
@@ -46,19 +47,21 @@ public class UserVideoAdapter extends RecyclerView.Adapter<UserVideoAdapter.User
         else
         {
             Glide.with(mContext)
-                    .load(userVideoThumbnail.getPictureURL()).into(holder.mImageView);
+                    .load(user_watch_later.getPictureURL()).into(holder.mImageView);
         }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return mThumbnails.size();
+        return mUserWatchLaterList.size();
     }
 
-    public class UserVideoHolder extends RecyclerView.ViewHolder {
+    public class UserWatchHolder extends RecyclerView.ViewHolder {
         private ImageView mImageView;
 
-        public UserVideoHolder(@NonNull View itemView) {
+        public UserWatchHolder(@NonNull View itemView) {
             super(itemView);
             mImageView=itemView.findViewById(R.id.video_thumbnail_image);
             itemView.setOnClickListener(new View.OnClickListener() {

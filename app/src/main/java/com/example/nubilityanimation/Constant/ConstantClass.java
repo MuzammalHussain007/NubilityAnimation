@@ -1,7 +1,5 @@
 package com.example.nubilityanimation.Constant;
 
-import org.w3c.dom.Comment;
-
 public class ConstantClass {
     public static final String DATABSENAME = "User Information";
 
@@ -21,6 +19,12 @@ public class ConstantClass {
     public static final String USERVIDEO ="UserVideo" ;
     public static final String USERVIDEOFOLDER ="UserVideoThumbnail/" ;
     public static final String USERWATCHINGVIDEO ="User Watching Video/" ;
-    public static final String USERREVIEW ="User Review" ; // no use yet
 
+
+    public static final String PRODUCTFORUSER ="User Product" ;
+    public static final String PRODUCTPICTURE ="Product Picture/" ;
+    public static final String USERCART ="Cart";
+    public static final String SAVEUSERVIDEOCOMMENT = "User Video Comment" ;
+    public static final String USERWATCHLATER = "User Watch Later";
+    public static final String USERFAVOURITE = "User Favourite";
 }

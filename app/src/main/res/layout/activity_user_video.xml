@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/grandient_layout"
     android:layout_height="match_parent"
     tools:context=".FragmentImplementation.UserVideoActivity">
 
@@ -30,36 +29,18 @@
             android:layout_height="100dp"
             android:layout_marginTop="80dp"
             android:id="@+id/video_start_progressbar"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/userVideoView"
-            android:id="@+id/video_rating_number"
-            android:text=""
-            android:textSize="40dp"
-            android:textColor="@color/colorwhite"
-            android:layout_marginTop="10dp"/>
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/rating_id"
-            android:numStars="4"
-            android:progressTint="@color/colorYellow"
-            android:stepSize="0.25"
 
-            android:layout_below="@+id/video_rating_number"
-            android:layout_marginTop="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/user_similar"
-            android:text="Similar"
-            android:textSize="30dp"
-            android:textColor="@color/colorwhite"
-            android:layout_below="@id/rating_id"/>
+            android:layout_marginTop="10dp"
+            android:text="Watch Next"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorBlack"
+            android:layout_below="@id/userVideoView"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -67,6 +48,46 @@
             android:id="@+id/user_video_recyclarView"
             android:layout_below="@+id/user_similar"
             android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/usercommentvideo"
+            android:text="E-Discussion"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp"
+            android:layout_below="@+id/user_video_recyclarView"
+            android:textColor="@color/colorBlack"/>
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+
+            android:background="@drawable/round_shape"
+            android:hint="Write Review Here"
+            android:id="@+id/user_comment_edit_text"
+            android:textColorHint="#808080"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/usercommentvideo"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usercommentvideo"
+            android:src="@drawable/send_message_icon"
+            android:layout_marginLeft="360dp"
+            android:id="@+id/send_message_icon"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_comment_edit_text"
+            android:layout_marginTop="5dp"
+            android:id="@+id/comment_view_recyclarView"
+            />
+
 
 
 

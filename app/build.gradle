@@ -10,6 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,6 +57,16 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:6.3.0'
    // VidwoPlayer With Custom Controller
     implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
+
+    // Image Slider
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'me.biubiubiu.justifytext:library:1.1'
+
+
+
 
 
 
