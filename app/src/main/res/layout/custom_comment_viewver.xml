@@ -25,10 +25,10 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/rating_id"
             android:numStars="5"
+            android:visibility="invisible"
             android:layout_marginTop="5dp"
             android:layout_alignParentRight="true"
-            android:scaleX="0.4"
-            android:scaleY="0.4"
+            style="?android:attr/ratingBarStyleSmall"
             android:progressTint="@color/colorYellow"
             android:stepSize="0.25"/>
         <TextView

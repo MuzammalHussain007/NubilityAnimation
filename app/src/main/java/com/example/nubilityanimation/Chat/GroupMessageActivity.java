@@ -1,5 +1,16 @@
 package com.example.nubilityanimation.Chat;
 
+import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ScrollView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,19 +18,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
 import com.example.nubilityanimation.Adapter.MessageAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Modal.MessageClass;
-import com.example.nubilityanimation.Modal.User;
 import com.example.nubilityanimation.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.nubilityanimation.UserSide.UserHomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class GroupMessageActivity extends AppCompatActivity {
@@ -37,17 +40,52 @@ public class GroupMessageActivity extends AppCompatActivity {
     private CardView mCardView;
     private EditText mEditText;
     private ImageButton mImageButton;
-    private DatabaseReference mReference;
+    private DatabaseReference mReference ,userReference;
     private FirebaseAuth mAuth;
     private List<MessageClass> message_transfer;
     private MessageClass mMessageClass;
+    private ScrollView mScrollView;
+    private LinearLayoutManager linearLayoutManager;
+    String userName,dateString;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home :
+            {
+                startActivity(new Intent(GroupMessageActivity.this, UserHomeActivity.class));
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_message);
         init();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(GroupMessageActivity.this));
+
+        userReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userName = snapshot.child("firstname").getValue().toString()+" "+snapshot.child("pastname").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+        getSupportActionBar().setTitle("Community");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        linearLayoutManager = new LinearLayoutManager(GroupMessageActivity.this);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,8 +95,15 @@ public class GroupMessageActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    mReference.push().setValue(new MessageClass(mAuth.getCurrentUser().getEmail(),mEditText.getText().toString(),String.valueOf(Calendar.getInstance().getTime())));
+                    DateFormat dateFormat = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        dateFormat = new SimpleDateFormat("hh.mm aa");
+                         dateString = dateFormat.format(new Date());
+                    }
+
+                    mReference.push().setValue(new MessageClass(userName,mEditText.getText().toString(),dateString));
                     mEditText.setText("");
+
                 }
             }
         });
@@ -95,13 +140,15 @@ public class GroupMessageActivity extends AppCompatActivity {
     }
 
     private void displayMessage(List<MessageClass> message_transfer) {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(GroupMessageActivity.this));
-        mRecyclerView.setAdapter(new MessageAdapter(message_transfer));
 
+        mRecyclerView.setAdapter(new MessageAdapter(message_transfer,getApplicationContext()));
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.scrollToPositionWithOffset(message_transfer.size()-1,message_transfer.size()-2);
 
     }
 
     private void init() {
+        userReference= FirebaseDatabase.getInstance().getReference(ConstantClass.DATABSENAME);
         mRecyclerView = findViewById(R.id.message_recyclarView);
         mCardView=findViewById(R.id.message_CardView);
         mEditText=findViewById(R.id.user_messagae);
@@ -109,6 +156,7 @@ public class GroupMessageActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         message_transfer=new ArrayList<>();
         mMessageClass = new MessageClass();
+        mScrollView=findViewById(R.id.groupMessage);
         mReference=FirebaseDatabase.getInstance().getReference(ConstantClass.GROUP_MESSAGE);
 
 

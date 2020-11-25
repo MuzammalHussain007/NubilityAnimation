@@ -19,12 +19,14 @@ public class ConstantClass {
     public static final String USERVIDEO ="UserVideo" ;
     public static final String USERVIDEOFOLDER ="UserVideoThumbnail/" ;
     public static final String USERWATCHINGVIDEO ="User Watching Video/" ;
-
-
     public static final String PRODUCTFORUSER ="User Product" ;
     public static final String PRODUCTPICTURE ="Product Picture/" ;
     public static final String USERCART ="Cart";
     public static final String SAVEUSERVIDEOCOMMENT = "User Video Comment" ;
     public static final String USERWATCHLATER = "User Watch Later";
     public static final String USERFAVOURITE = "User Favourite";
+    public static final String USERREVIEWVIDEO ="User Video Review" ;
+    public static final String USER_ADDRESS_INFORMATION ="User Address Information" ;
+    public static final String USERVIEWORDER ="User View Order" ;
+    public static final String USER_ORDER_INFORMATION ="User Order Information" ;
 }

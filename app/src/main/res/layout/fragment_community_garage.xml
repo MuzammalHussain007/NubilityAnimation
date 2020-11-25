@@ -3,146 +3,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grandient_layout" >
-    <RelativeLayout
+     >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/grandient_layout"
-        tools:context=".Fragments.CommunityGarageFragment">
-
-        <LinearLayout
+        android:background="@color/claywhite"
+        android:orientation="vertical">
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/e_disscussion_image_view"
-                    android:src="@drawable/diss"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="E-Disscussion"
-                    android:textColor="@color/colorwhite"
-                    android:id="@+id/community_garage_text_view"
-                    android:textSize="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="30dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/fan_art_image_view"
-                    android:src="@drawable/faan"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fan-Art"
-                    android:textSize="30dp"
-                    android:textColor="@color/colorwhite"
-                    android:id="@+id/fan_art_text_view"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/e_store_image_view"
-                    android:src="@drawable/shoping"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="E-Store"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="30dp"
-                    android:id="@+id/e_store_text_view"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/cart_image_view"
-                    android:src="@drawable/cart"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cart"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="30dp"
-                    android:id="@+id/cart_text_view"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/watch_later_image_view"
-                    android:src="@drawable/watch_later"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Watch Later"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="30dp"
-                    android:id="@+id/watch_later_text_view"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"/>
-            </LinearLayout>
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/fan_art"
+            android:src="@drawable/fan"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/cm"
+            android:layout_marginTop="10dp"
+            android:id="@+id/e_discussion"/>
+        <ImageView
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/favourite_image_view"
-                    android:src="@drawable/watch_later"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Favourite"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="30dp"
-                    android:id="@+id/favourite_text_view"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"/>
-            </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/e_store"
+            android:src="@drawable/es"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/item_favourite"
+            android:src="@drawable/faviourite"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/watch_later"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/watch_later"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="invisible"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/watch_later"/>
 
 
 
 
-        </LinearLayout>
 
 
-    </RelativeLayout>
+
+
+
+    </LinearLayout>
 
 </ScrollView>

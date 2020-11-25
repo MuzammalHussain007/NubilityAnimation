@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/grandient_layout"
+    android:background="@color/claywhite"
     android:layout_height="match_parent"
     tools:context=".ProfileDetail.ProfileDetailsActivity">
 
@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/feb_Action_button"
         android:layout_alignParentRight="true"
-        android:backgroundTint="#C2185B"
+        android:backgroundTint="@color/colorYellow"
         android:src="@drawable/update_icon" />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -33,7 +33,7 @@
         android:text="First Name"
         android:id="@+id/user_detail_first_name"
         android:textSize="20dp"
-        android:textColor="@color/colorwhite"
+        android:textColor="@color/colorBlack"
         />
 
     <TextView
@@ -45,7 +45,7 @@
         android:text="Last Name"
         android:id="@+id/user_detail_last_name"
         android:textSize="20dp"
-        android:textColor="@color/colorwhite"
+        android:textColor="@color/colorBlack"
         />
 
 
@@ -58,7 +58,7 @@
         android:text="Email Address"
         android:id="@+id/user_detail_email"
         android:textSize="20dp"
-        android:textColor="@color/colorwhite"
+        android:textColor="@color/colorBlack"
         />
 
 

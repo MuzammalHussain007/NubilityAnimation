@@ -2,6 +2,7 @@ package com.example.nubilityanimation.Fragments;
 
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment implements RecyclarViewInterface {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         View v= inflater.inflate(R.layout.fragment_home, container, false);
         mReference= FirebaseDatabase.getInstance().getReference(ConstantClass.USERVIDEO);

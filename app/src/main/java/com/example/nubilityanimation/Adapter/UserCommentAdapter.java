@@ -36,8 +36,9 @@ public class UserCommentAdapter extends RecyclerView.Adapter<UserCommentAdapter.
     @Override
     public void onBindViewHolder(@NonNull UserCommentHolder holder, int position) {
         UserCommentVideo userCommentVideo = mUserComments.get(position);
-        holder.usertextView.setText(userCommentVideo.getUserText());  //get user text refer as username
-        holder.commentText.setText(userCommentVideo.getUsername());
+        holder.usertextView.setText(userCommentVideo.getUsername());
+        holder.commentText.setText(userCommentVideo.getUserText());
+
     }
 
     @Override
@@ -53,7 +54,6 @@ public class UserCommentAdapter extends RecyclerView.Adapter<UserCommentAdapter.
 
         public UserCommentHolder(@NonNull View itemView) {
             super(itemView);
-            mRatingBar=itemView.findViewById(R.id.rating_id);
             usertextView=itemView.findViewById(R.id.custom_comment_username);
             commentText=itemView.findViewById(R.id.user_custom_comment);
         }

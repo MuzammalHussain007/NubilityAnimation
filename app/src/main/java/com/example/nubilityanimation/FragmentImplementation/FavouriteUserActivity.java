@@ -1,7 +1,9 @@
 package com.example.nubilityanimation.FragmentImplementation;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,11 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nubilityanimation.Adapter.UserWatchLaterAdapter;
+import com.example.nubilityanimation.Adapter.FavouriteAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Interface.RecyclarViewInterface;
-import com.example.nubilityanimation.Modal.User_Watch_Later;
+import com.example.nubilityanimation.Modal.User_Favourite;
 import com.example.nubilityanimation.R;
+import com.example.nubilityanimation.UserSide.UserHomeActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,12 +30,29 @@ import java.util.List;
 public class FavouriteUserActivity extends AppCompatActivity implements RecyclarViewInterface {
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabaseReference;
-    private List<User_Watch_Later> mUserWatchLater;
+    private List<User_Favourite> mUserFavourites;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home :
+            {
+                startActivity(new Intent(FavouriteUserActivity.this, UserHomeActivity.class));
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_user);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getSupportActionBar().setTitle("Favourite");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -42,9 +62,9 @@ public class FavouriteUserActivity extends AppCompatActivity implements Recyclar
         mDatabaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                User_Watch_Later user_watch_later = snapshot.getValue(User_Watch_Later.class);
-                mUserWatchLater.add(user_watch_later);
-                mRecyclerView.setAdapter(new UserWatchLaterAdapter(mUserWatchLater,getApplicationContext(),FavouriteUserActivity.this));
+               User_Favourite user_favourite = snapshot.getValue(User_Favourite.class);
+               mUserFavourites.add(user_favourite);
+               mRecyclerView.setAdapter(new FavouriteAdapter(mUserFavourites,getApplicationContext(),FavouriteUserActivity.this));
 
             }
 
@@ -72,7 +92,8 @@ public class FavouriteUserActivity extends AppCompatActivity implements Recyclar
     }
 
     private void init() {
-        mUserWatchLater=new ArrayList<>();
+        mUserFavourites= new ArrayList<>();
+
         mRecyclerView = findViewById(R.id.favouriteRecyclarView);
         mDatabaseReference= FirebaseDatabase.getInstance().getReference(ConstantClass.USERFAVOURITE);
         
@@ -81,12 +102,12 @@ public class FavouriteUserActivity extends AppCompatActivity implements Recyclar
 
     @Override
     public void onClickListner(int position) {
-        User_Watch_Later user_watch_later = mUserWatchLater.get(position);
+        User_Favourite user_favourite = mUserFavourites.get(position);
         String videoid,videoURL,pictureURL;
 
-        videoid=user_watch_later.getVideoId();
-        videoURL=user_watch_later.getVideoURL();
-        pictureURL=user_watch_later.getPictureURL();
+        videoid=user_favourite.getVideoId();
+        videoURL=user_favourite.getVideoURL();
+        pictureURL=user_favourite.getPictureURL();
 
         Intent intent = new Intent(getApplicationContext(),UserVideoActivity.class);
         intent.putExtra("user_video",videoid);

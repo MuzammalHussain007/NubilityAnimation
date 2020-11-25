@@ -2,6 +2,7 @@ package com.example.nubilityanimation.FragmentImplementation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Interface.RecyclarViewInterface;
 import com.example.nubilityanimation.Modal.User_Watch_Later;
 import com.example.nubilityanimation.R;
+import com.example.nubilityanimation.UserSide.UserHomeActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +29,20 @@ public class WatchLaterActivity extends AppCompatActivity implements RecyclarVie
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabaseReference;
     private List<User_Watch_Later> mUserWatchLater;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home :
+            {
+              startActivity(new Intent(WatchLaterActivity.this, UserHomeActivity.class));
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,8 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FragmentImplementation.FavouriteUserActivity"></activity>
-        <activity android:name=".FragmentImplementation.WatchLaterActivity" />
+        <activity android:name=".E_Store.UserAddressActivity"></activity>
+        <activity android:name=".E_Store.UserViewOrderActivity" />
+        <activity android:name=".FragmentImplementation.FavouriteUserActivity" />
+        <activity
+            android:name=".FragmentImplementation.WatchLaterActivity"
+            android:parentActivityName=".UserSide.UserHomeActivity" />
         <activity android:name=".E_Store.UserCartActivity" />
         <activity android:name=".E_Store.Product_Sellar_Activity" />
         <activity android:name=".E_Store.ProductViewActivity" />

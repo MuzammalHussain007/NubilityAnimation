@@ -1,7 +1,11 @@
 package com.example.nubilityanimation.E_Store;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +18,7 @@ import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Interface.RecyclarViewInterface;
 import com.example.nubilityanimation.Modal.ProductForUser;
 import com.example.nubilityanimation.R;
+import com.example.nubilityanimation.UserSide.UserHomeActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,14 +34,43 @@ public class ProductViewActivity extends AppCompatActivity implements RecyclarVi
     private RecyclerView mRecyclerView;
     private List<ProductForUser> mProducts;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.card_layout,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+            {
+                startActivity(new Intent(ProductViewActivity.this, UserHomeActivity.class));
+                break;
+            }
+
+            case R.id.cart_shoping :
+            {
+                startActivity(new Intent(ProductViewActivity.this,UserCartActivity.class));
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
         init();
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        getSupportActionBar().setTitle("E-Sotre");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
         mDatabaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -86,6 +120,7 @@ public class ProductViewActivity extends AppCompatActivity implements RecyclarVi
         String url = productForUser.getProductImage();
         String price= productForUser.getProductPrice();
         String pro_stock = productForUser.getProductStock();
+        String pro_Author= productForUser.getProductAuthor();
         Intent intent = new Intent(this,Product_Sellar_Activity.class);
         intent.putExtra("pro_id",id);
         intent.putExtra("pro_des",des);
@@ -93,6 +128,7 @@ public class ProductViewActivity extends AppCompatActivity implements RecyclarVi
         intent.putExtra("pro__stock",pro_stock);
         intent.putExtra("pro_price",price);
         intent.putExtra("pro_name",name);
+        intent.putExtra("pro_author",pro_Author);
         startActivity(intent);
 
     }

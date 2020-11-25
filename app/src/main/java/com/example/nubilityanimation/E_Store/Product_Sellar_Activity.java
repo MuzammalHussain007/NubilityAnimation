@@ -1,6 +1,11 @@
 package com.example.nubilityanimation.E_Store;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,19 +25,47 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-
 public class Product_Sellar_Activity extends AppCompatActivity {
     private ImageView product_image,increment,decrement;
-    private TextView quantity,title,description;
+    private TextView quantity,title,description,stock,price;
     private Button add_to_Cart;
     private DatabaseReference mReference,product;
     private int item_quantity=0;
     private String product_id,product_name,product_price,product_des,product_stock,image;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.card_layout,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home   :
+            {
+                startActivity(new Intent(Product_Sellar_Activity.this,ProductViewActivity.class));
+                break;
+            }
+            case R.id.cart_shoping :
+            {
+                startActivity(new Intent(Product_Sellar_Activity.this,UserCartActivity.class));
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Product Detail");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_product__sellar_);
         init();
         increment.setOnClickListener(new View.OnClickListener() {
@@ -75,29 +108,24 @@ public class Product_Sellar_Activity extends AppCompatActivity {
                     }
                     else
                     {
-                        String id = mReference.push().getKey();
-                        Cart cart = new Cart(id,product_id,product_name,product_price,String.valueOf(item_quantity),image);
-                        mReference.child(FirebaseAuth.getInstance().getUid()).child(id).setValue(cart)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        int item_stock = Integer.parseInt(product_stock);
-                                        item_stock=item_stock-item_quantity;
-                                        String send = String.valueOf(item_stock);
-                                        HashMap<String,Object> map = new HashMap<>();
-                                        map.put("productStock",send);
-                                        product.child(product_id).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful())
-                                                {
-                                                    Toast.makeText(getApplicationContext(),"Product added into Cart",Toast.LENGTH_SHORT).show();
-
-                                                }
+                        if (item_quantity==0 || item_quantity<0)
+                        {
+                            Toast.makeText(getApplicationContext(), "Select atleast one quantity", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            String id = mReference.push().getKey();
+                            Cart cart = new Cart(id, product_id, product_name, product_price, String.valueOf(item_quantity), image);
+                            mReference.child(FirebaseAuth.getInstance().getUid()).child(product_id).setValue(cart)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful())
+                                            {
+                                                Toast.makeText(getApplicationContext(),"Item Add into Cart",Toast.LENGTH_SHORT).show();
                                             }
-                                        });
-                                    }
-                                });
+                                        }
+                                    });
+                        }
                     }
 
 
@@ -116,6 +144,8 @@ public class Product_Sellar_Activity extends AppCompatActivity {
         product_image=findViewById(R.id.product_seller_image);
         increment=findViewById(R.id.product_increment);
         decrement=findViewById(R.id.product_decrement);
+        stock=findViewById(R.id.product_seller_stock);
+        price=findViewById(R.id.product_seller_price);
         mReference= FirebaseDatabase.getInstance().getReference(ConstantClass.USERCART);
 
         Bundle intent= getIntent().getExtras();
@@ -134,8 +164,10 @@ public class Product_Sellar_Activity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(image).into(product_image);
         }
         title.setText("Product Name: "+product_name);
-        description.setText("Product Description:\n"+product_des);
+        description.setText("Product Description: "+product_des);
         product=FirebaseDatabase.getInstance().getReference(ConstantClass.PRODUCTFORUSER);
+        price.setText("Price: Rs "+product_price+"/-");
+        stock.setText("Stock :"+product_stock);
 
     }
 }

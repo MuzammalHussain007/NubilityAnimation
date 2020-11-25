@@ -1,5 +1,11 @@
 package com.example.nubilityanimation.FanArt;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,16 +13,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-
 import com.example.nubilityanimation.Adapter.PostAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Modal.PostItem;
 import com.example.nubilityanimation.R;
+import com.example.nubilityanimation.UserSide.UserHomeActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,14 +34,17 @@ public class DisplayPostActivity extends AppCompatActivity {
     private DatabaseReference mReference;
     private List<String> postidList = new ArrayList<>();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_post);
         init();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(DisplayPostActivity.this));
+        getSupportActionBar().setTitle("Fan-Art");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        final LinearLayoutManager linearLayoutManager  = new LinearLayoutManager(DisplayPostActivity.this);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
 
         mReference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -49,6 +53,8 @@ public class DisplayPostActivity extends AppCompatActivity {
                PostItem postItem = snapshot.getValue(PostItem.class);
                mPostItems.add(postItem);
                mRecyclerView.setAdapter(new PostAdapter(mPostItems,DisplayPostActivity.this));
+
+
 
             }
 
@@ -72,6 +78,7 @@ public class DisplayPostActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
@@ -98,6 +105,11 @@ public class DisplayPostActivity extends AppCompatActivity {
             {
              startActivity(new Intent(getApplicationContext(),CreatePostActivity.class));
                 finish();
+                break;
+            }
+            case android.R.id.home :
+            {
+                startActivity(new Intent(DisplayPostActivity.this, UserHomeActivity.class));
                 break;
             }
         }

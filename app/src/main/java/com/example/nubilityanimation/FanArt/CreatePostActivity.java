@@ -1,13 +1,5 @@
 package com.example.nubilityanimation.FanArt;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,25 +11,27 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
- import androidx.appcompat.widget.Toolbar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.nubilityanimation.Adapter.PostAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Modal.PostItem;
 import com.example.nubilityanimation.R;
-import com.example.nubilityanimation.Registration.PictureUpload;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -72,11 +66,27 @@ public class CreatePostActivity extends AppCompatActivity {
     private StorageReference mStorageReference;
     private String uname , uuserimage ,postid;
 
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+            {
+                startActivity(new Intent(CreatePostActivity.this,DisplayPostActivity.class));
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
         init();
+        getSupportActionBar().setTitle("Create Post");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         mFloatingActionButton
                 .setOnClickListener(new View.OnClickListener() {
                     @Override

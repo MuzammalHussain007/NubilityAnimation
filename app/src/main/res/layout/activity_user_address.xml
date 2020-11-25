@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".E_Store.UserAddressActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_order_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:hint="Enter Your Name"
+        android:textColorHint="@color/colorlorgrey"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_order_phone"
+        android:inputType="number"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/user_order_name"
+        android:layout_marginLeft="10dp"
+        android:hint="Enter Your Phone Number"
+        android:textColorHint="@color/colorlorgrey"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_order_address"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/user_order_phone"
+        android:layout_marginLeft="10dp"
+        android:hint="Enter Your Address"
+        android:textColorHint="@color/colorlorgrey"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_order_address"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/user_order_place_order"
+        android:text="Place Your Order"
+        android:textAllCaps="false"/>
+
+</RelativeLayout>

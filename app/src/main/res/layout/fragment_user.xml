@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grandient_layout"
+    android:background="@color/claywhite"
     tools:context=".Fragments.UserFragment">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Name"
                 android:textAlignment="center"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="20dp"
                 android:id="@+id/user_fragment_name"
                 android:layout_marginTop="20px"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/user_fragment_account"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/colorBlack"
                 android:layout_marginLeft="50dp"
                 android:drawableLeft="@drawable/user_account"
                 android:drawableStart="@drawable/user_account"
@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/colorBlack"
                 android:id="@+id/user_fragment_notification"
                 android:drawableStart="@drawable/notification"
                 android:drawableLeft="@drawable/notification"
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/colorBlack"
                 android:id="@+id/user_fragment_setting"
                 android:drawableStart="@drawable/setting"
                 android:layout_marginTop="5dp"
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/user_fragment_help"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/colorBlack"
                 android:layout_marginTop="5dp"
                 android:drawableStart="@drawable/help"
                 android:layout_marginLeft="50dp"
@@ -100,13 +100,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/user_fragment_logout"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/colorwhite"
-                android:layout_marginLeft="50dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="43dp"
                 android:text="Logout"
-                android:drawableStart="@drawable/user_logout"
+                android:drawableStart="@drawable/llog_out"
                 android:textSize="25dp"
-                android:paddingTop="10dp"
-                android:drawableLeft="@drawable/user_logout" />
+                android:drawableLeft="@drawable/llog_out" />
         </LinearLayout>
 
 

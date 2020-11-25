@@ -52,8 +52,19 @@
         android:hint="Enter Product Price"
         android:layout_below="@id/product_stock_edit_text"
         android:layout_marginTop="10dp"
-
         android:inputType="number"
+        android:background="@drawable/round_shape"
+        android:paddingLeft="20dp"
+        android:textColorHint="@color/colorBlack"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/product_author_edit_text"
+        android:hint="Enter Product Author"
+        android:layout_below="@id/product_price_edit_text"
+        android:layout_marginTop="10dp"
+        android:inputType="text"
         android:background="@drawable/round_shape"
         android:paddingLeft="20dp"
         android:textColorHint="@color/colorBlack"/>
@@ -63,7 +74,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/product_add_button"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/product_price_edit_text"
+        android:layout_below="@id/product_author_edit_text"
         android:text="Upload"
         android:textAllCaps="false"/>
     <ProgressBar

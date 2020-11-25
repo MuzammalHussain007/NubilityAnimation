@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/grandient_layout"
+        android:background="@color/colorwhite"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -20,14 +20,14 @@
             android:text="Sender Name"
             android:layout_alignParentRight="true"
             android:paddingRight="20dp"
-            android:textColor="@color/colorwhite"
+            android:textColor="@color/colorlorgrey"
             android:id="@+id/group_message_sender_name"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Message"
-            android:textColor="@color/colorwhite"
+            android:textColor="@color/colorBlack"
             android:paddingLeft="30dp"
             android:id="@+id/group_message_message_name"
             android:layout_below="@+id/group_message_sender_name"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Sending Time"
             android:paddingRight="20dp"
-            android:textColor="@color/colorwhite"
+            android:textColor="@color/colorBlack"
             android:id="@+id/group_message_time_stamp"
             android:layout_below="@+id/group_message_message_name"
             android:layout_marginTop="10dp"

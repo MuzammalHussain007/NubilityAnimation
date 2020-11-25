@@ -39,7 +39,7 @@ public class Add_Admin_User_Product_Fragment extends Fragment {
     private Button upload_button;
     private DatabaseReference mReference;
     private StorageReference mStorageReference;
-    private EditText product_name,product_description,product_stock,product_price;
+    private EditText product_name,product_description,product_author,product_stock,product_price;
     private ProgressBar progressBar;
     private String imageUrl;
 
@@ -55,6 +55,7 @@ public class Add_Admin_User_Product_Fragment extends Fragment {
         product_stock=v.findViewById(R.id.product_stock_edit_text);
         product_price=v.findViewById(R.id.product_price_edit_text);
         upload_button=v.findViewById(R.id.product_add_button);
+        product_author=v.findViewById(R.id.product_author_edit_text);
         mStorageReference= FirebaseStorage.getInstance().getReference();
         mReference= FirebaseDatabase.getInstance().getReference(ConstantClass.PRODUCTFORUSER);
         progressBar = v.findViewById(R.id.product_progress_bar);
@@ -79,7 +80,7 @@ public class Add_Admin_User_Product_Fragment extends Fragment {
                 else
                 {
                     String id = mReference.push().getKey();
-                    mReference.child(id).setValue(new ProductForUser(id,product_name.getText().toString(),imageUrl,product_description.getText().toString(),product_price.getText().toString(),product_stock.getText().toString())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    mReference.child(id).setValue(new ProductForUser(id,product_name.getText().toString(),imageUrl,product_description.getText().toString(),product_author.getText().toString(),product_price.getText().toString(),product_stock.getText().toString())).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                            if (task.isSuccessful())
@@ -88,6 +89,7 @@ public class Add_Admin_User_Product_Fragment extends Fragment {
                                product_description.setText("");
                                product_price.setText("");
                                product_stock.setText("");
+                               product_author.setText("");
                            }
                         }
                     });

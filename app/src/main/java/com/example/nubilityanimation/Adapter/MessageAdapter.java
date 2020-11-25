@@ -1,5 +1,6 @@
 package com.example.nubilityanimation.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageHolder> {
     private List<MessageClass> mMessageClasses;
+    private Context mContext;
 
-    public MessageAdapter(List<MessageClass> messageClasses) {
-        mMessageClasses = messageClasses;
+    public MessageAdapter(List<MessageClass> mMessageClasses, Context mContext) {
+        this.mMessageClasses = mMessageClasses;
+        this.mContext = mContext;
     }
 
     @NonNull

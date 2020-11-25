@@ -40,9 +40,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
         ProductForUser productForUser = mProducts.get(position);
-        holder.title.setText("Name: "+productForUser.getProductName());
-        holder.stock.setText("Stock: "+productForUser.getProductStock());
-        holder.price.setText("Price(Rs): "+productForUser.getProductPrice());
+        holder.title.setText(productForUser.getProductName());
+        holder.stock.setText("Author : "+productForUser.getProductAuthor());
+        holder.price.setText("Price:Rs "+productForUser.getProductPrice()+ "/-");
 
         if (productForUser.getProductImage().isEmpty())
         {
@@ -71,7 +71,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             super(itemView);
             mImage= itemView.findViewById(R.id.custom_product_image);
             title=itemView.findViewById(R.id.custom_product_title);
-            stock=itemView.findViewById(R.id.cuatom_product_stock);
+            stock=itemView.findViewById(R.id.cuatom_product_stock);  //place author in it
             price=itemView.findViewById(R.id.custom_product_price);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

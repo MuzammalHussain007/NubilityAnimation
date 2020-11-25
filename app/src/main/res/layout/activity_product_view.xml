@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/grandient_layout"
+    android:background="@color/claywhite"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".E_Store.ProductViewActivity">
@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/product_reycyclarView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginTop="5dp"/>
 
 </RelativeLayout>

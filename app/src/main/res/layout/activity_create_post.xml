@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grandient_layout"
+    android:background="@color/claywhite"
     tools:context=".FanArt.CreatePostActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,7 +19,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
-
+        android:visibility="invisible"
         android:backgroundTint="@color/colorwhite"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="257dp"
         android:src="@drawable/user"
+        android:scaleType="fitXY"
         android:id="@+id/user_post_image_view"
         android:layout_below="@+id/user_post_edit_text"
         android:layout_marginTop="20dp"/>
@@ -41,7 +42,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_gradient"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorwhite"
         android:layout_below="@+id/user_post_image_view"
         android:id="@+id/usre_action_butn"
         android:textAllCaps="false"

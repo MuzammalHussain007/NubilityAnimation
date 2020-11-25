@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.nubilityanimation.Chat.GroupMessageActivity;
 import com.example.nubilityanimation.E_Store.ProductViewActivity;
-import com.example.nubilityanimation.E_Store.UserCartActivity;
 import com.example.nubilityanimation.FanArt.DisplayPostActivity;
 import com.example.nubilityanimation.FragmentImplementation.FavouriteUserActivity;
 import com.example.nubilityanimation.FragmentImplementation.WatchLaterActivity;
@@ -19,17 +18,17 @@ import com.example.nubilityanimation.R;
 
 
 public class CommunityGarageFragment extends Fragment {
-       private TextView estore,fanart ,disscussion ,add_tocart,watch_Later,favorite;
+       private ImageView estore,fanart ,disscussion ,watch_Later,favorite;
        @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_community_garage, container, false);
-        disscussion=v.findViewById(R.id.community_garage_text_view);
-        fanart=v.findViewById(R.id.fan_art_text_view);
-        estore=v.findViewById(R.id.e_store_text_view);
-        favorite=v.findViewById(R.id.favourite_text_view);
-        add_tocart=v.findViewById(R.id.cart_text_view);
-        watch_Later=v.findViewById(R.id.watch_later_text_view);
+        favorite= v.findViewById(R.id.item_favourite);
+        estore=v.findViewById(R.id.e_store);
+        fanart=v.findViewById(R.id.fan_art);
+        disscussion=v.findViewById(R.id.e_discussion);
+        watch_Later=v.findViewById(R.id.watch_later);
+
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,13 +41,6 @@ public class CommunityGarageFragment extends Fragment {
             public void onClick(View view) {
                 startActivity(new Intent(getActivity().getApplicationContext(), WatchLaterActivity.class));
                 getActivity().finish();
-            }
-        });
-        add_tocart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               startActivity(new Intent(getActivity().getApplicationContext(), UserCartActivity.class));
-               getActivity().finish();
             }
         });
 

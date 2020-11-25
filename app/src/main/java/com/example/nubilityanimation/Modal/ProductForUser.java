@@ -1,7 +1,7 @@
 package com.example.nubilityanimation.Modal;
 
 public class ProductForUser {
-    private String productId,productName,productImage,productDescription,productPrice,productStock;
+    private String productId,productName,productImage,productDescription,productAuthor,productPrice,productStock;
 
     public String getProductId() {
         return productId;
@@ -51,14 +51,24 @@ public class ProductForUser {
         this.productStock = productStock;
     }
 
-    public ProductForUser(String productId, String productName, String productImage, String productDescription, String productPrice, String productStock) {
+    public String getProductAuthor() {
+        return productAuthor;
+    }
+
+    public void setProductAuthor(String productAuthor) {
+        this.productAuthor = productAuthor;
+    }
+
+    public ProductForUser(String productId, String productName, String productImage, String productDescription, String productAuthor, String productPrice, String productStock) {
         this.productId = productId;
         this.productName = productName;
         this.productImage = productImage;
         this.productDescription = productDescription;
+        this.productAuthor = productAuthor;
         this.productPrice = productPrice;
         this.productStock = productStock;
     }
+
     public ProductForUser()
     {
 

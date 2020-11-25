@@ -24,6 +24,18 @@
             android:background="@color/cardview_dark_background"
             android:id="@+id/userVideoView"
             android:layout_margin="2dp"/>
+        <RatingBar
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_video_rating"
+            android:numStars="5"
+            android:progressTint="@color/colorYellow"
+            android:scaleY="0.7"
+            android:scaleX="0.9"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:stepSize="1"
+            android:layout_below="@+id/userVideoView"/>
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -40,7 +52,7 @@
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/colorBlack"
-            android:layout_below="@id/userVideoView"/>
+            android:layout_below="@id/user_video_rating"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -57,12 +69,13 @@
             android:textSize="20dp"
             android:layout_below="@+id/user_video_recyclarView"
             android:textColor="@color/colorBlack"/>
+
         <EditText
             android:layout_width="350dp"
             android:layout_height="40dp"
 
             android:background="@drawable/round_shape"
-            android:hint="Write Review Here"
+            android:hint="Start Discussion Here"
             android:id="@+id/user_comment_edit_text"
             android:textColorHint="#808080"
             android:paddingLeft="10dp"
@@ -78,7 +91,7 @@
             android:id="@+id/send_message_icon"
             android:layout_marginTop="20dp"
             android:clickable="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
