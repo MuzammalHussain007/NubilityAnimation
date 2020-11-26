@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="30dp"
     android:fillViewport="true"
-    android:background="@drawable/grandient_layout"
+    android:background="@color/claywhite"
     tools:context=".Registration.PictureUpload">
 
     <RelativeLayout
@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:text="Next"
             android:id="@+id/user_image_btn"
-            android:background="@drawable/button_gradient"
+            android:background="@drawable/round_shape"
+            android:backgroundTint="@color/colorwhite"
             android:layout_below="@+id/user_image"
             android:layout_marginTop="10dp"
             android:textSize="20dp"

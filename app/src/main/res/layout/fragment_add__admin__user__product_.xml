@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/claywhite"
     tools:context=".Fragments.Add_Admin_User_Product_Fragment">
     <ImageView
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:src="@drawable/user"
+        android:scaleType="fitXY"
+        android:src="@drawable/product"
         android:id="@+id/product_image_view"/>
     <EditText
         android:layout_width="match_parent"

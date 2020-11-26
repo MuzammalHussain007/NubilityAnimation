@@ -3,15 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/claywhite"
     tools:context=".Fragments.UserVideo">
 
     <ImageView
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:id="@+id/admin_side_video_image"
-        android:src="@drawable/user"/>
+        android:src="@color/claywhite"/>
 
 
        <EditText

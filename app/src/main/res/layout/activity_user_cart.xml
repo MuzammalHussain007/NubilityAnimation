@@ -12,30 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/cart_recyclar_view"
         />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Price"
-            android:layout_marginTop="70dp"
-            android:textSize="15dp"
-            android:textColor="@color/colorBlack"
-            android:id="@+id/cart_total_price"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            android:textColor="@color/colorBlack"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="70dp"
-            android:id="@+id/product_button_next"/>
-
-    </RelativeLayout>
 
 
 </RelativeLayout>

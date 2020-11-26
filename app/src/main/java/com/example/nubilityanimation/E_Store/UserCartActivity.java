@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ public class UserCartActivity extends AppCompatActivity implements RecyclarViewI
     private RecyclerView mRecyclerView;
     private List<Cart> mcartList;
     private Button mbtn_next;
+    private ItemTouchHelper.SimpleCallback itemTouchHelper;
 
 
     @Override
@@ -72,6 +74,7 @@ public class UserCartActivity extends AppCompatActivity implements RecyclarViewI
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                   Cart cart = snapshot.getValue(Cart.class);
                   mcartList.add(cart);
+                  new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(mRecyclerView);
                   mRecyclerView.setAdapter(new CartAdapter(mcartList,getApplicationContext(),UserCartActivity.this));
             }
 
@@ -95,12 +98,25 @@ public class UserCartActivity extends AppCompatActivity implements RecyclarViewI
 
             }
         });
+        itemTouchHelper = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                mReference.child(FirebaseAuth.getInstance().getUid()).child(mcartList.get(viewHolder.getAdapterPosition()).getProduct_id()).removeValue();
+                mcartList.remove(viewHolder.getAdapterPosition());
+
+
+            }
+        };
     }
 
     private void init() {
         mcartList= new ArrayList<>();
         mRecyclerView=findViewById(R.id.cart_recyclar_view);
-        mbtn_next=findViewById(R.id.product_button_next);
         mReference=FirebaseDatabase.getInstance().getReference(ConstantClass.USERCART);
 
     }

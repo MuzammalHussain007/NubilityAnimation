@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nubilityanimation.Adapter.UserWatchLaterAdapter;
@@ -29,6 +30,7 @@ public class WatchLaterActivity extends AppCompatActivity implements RecyclarVie
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabaseReference;
     private List<User_Watch_Later> mUserWatchLater;
+    private ItemTouchHelper.SimpleCallback itemTouchHelper;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -82,6 +84,8 @@ public class WatchLaterActivity extends AppCompatActivity implements RecyclarVie
 
             }
         });
+
+
     }
 
     private void init() {
