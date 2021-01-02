@@ -138,7 +138,7 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
                         {
                             case 0:
                             {
-                                mReferenceWatchLator.child(id).setValue(new User_Watch_Later(id,videoURLS,pictureURL)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                mReferenceWatchLator.child(FirebaseAuth.getInstance().getUid()).child(id).setValue(new User_Watch_Later(id,videoURLS,pictureURL)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                          if (task.isSuccessful())
@@ -153,7 +153,7 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
                             }
                             case 1:
                             {
-                                mReferenceFavourite.child(id).setValue(new User_Watch_Later(id,videoURLS,pictureURL)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                mReferenceFavourite.child(FirebaseAuth.getInstance().getUid()).child(id).setValue(new User_Watch_Later(id,videoURLS,pictureURL)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful())
@@ -400,8 +400,16 @@ public class UserVideoActivity extends AppCompatActivity implements RecyclarView
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mPlayerView.getLayoutParams();
 
 
-                    params.width = 2400;
-                    params.height = 1080;
+                    params.width = params.MATCH_PARENT;
+//                    mPlayerView.controller
+//
+
+//                    DisplayMetrics displayMetrics = new DisplayMetrics();
+//                    getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//                    int height = displayMetrics.heightPixels;
+//                    int width = displayMetrics.widthPixels;
+//                    params.height = (int) (width * getApplicationContext().getResources().getDisplayMetrics().density);
+                    params.height = params.MATCH_PARENT;
                     mPlayerView.setLayoutParams(params);
 
                     fulscreen = true;

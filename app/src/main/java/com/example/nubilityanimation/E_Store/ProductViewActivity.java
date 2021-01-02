@@ -66,7 +66,7 @@ public class ProductViewActivity extends AppCompatActivity implements RecyclarVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
         init();
-        getSupportActionBar().setTitle("E-Sotre");
+        getSupportActionBar().setTitle("E-Store");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

@@ -17,6 +17,7 @@ import com.example.nubilityanimation.Interface.RecyclarViewInterface;
 import com.example.nubilityanimation.Modal.User_Watch_Later;
 import com.example.nubilityanimation.R;
 import com.example.nubilityanimation.UserSide.UserHomeActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,11 +56,12 @@ public class WatchLaterActivity extends AppCompatActivity implements RecyclarVie
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
-        mDatabaseReference.addChildEventListener(new ChildEventListener() {
+        mDatabaseReference.child(FirebaseAuth.getInstance().getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 User_Watch_Later user_watch_later = snapshot.getValue(User_Watch_Later.class);
                 mUserWatchLater.add(user_watch_later);
+                new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(mRecyclerView);
                 mRecyclerView.setAdapter(new UserWatchLaterAdapter(mUserWatchLater,getApplicationContext(),WatchLaterActivity.this));
 
             }
@@ -83,9 +85,23 @@ public class WatchLaterActivity extends AppCompatActivity implements RecyclarVie
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
+
         });
 
+      itemTouchHelper= new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+          @Override
+          public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+              return false;
+          }
 
+          @Override
+          public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+             int position = viewHolder.getAdapterPosition();
+             mDatabaseReference.child(FirebaseAuth.getInstance().getUid()).child(mUserWatchLater.get(position).getVideoId()).removeValue();
+
+          }
+      };
     }
 
     private void init() {

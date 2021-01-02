@@ -29,4 +29,6 @@ public class ConstantClass {
     public static final String USER_ADDRESS_INFORMATION ="User Address Information" ;
     public static final String USERVIEWORDER ="User View Order" ;
     public static final String USER_ORDER_INFORMATION ="User Order Information" ;
+    public static final String QUIZ_TOPIC ="Quiz Topic";
+    public static final String QUIZ_QUESTION ="Quiz Question" ;
 }

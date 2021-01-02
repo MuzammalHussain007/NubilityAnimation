@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/claywhite"
+    tools:context=".AdminSide.Add_Question_Activity">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Enter Question Statement"
+        android:textColorHint="@color/colorlorgrey"
+        android:id="@+id/quiz_question_statement"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_question_statement"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Option1 "
+        android:id="@+id/quiz_option1"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_option1"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Option2 "
+        android:id="@+id/quiz_option2"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_option2"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Option3"
+        android:id="@+id/quiz_option3"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_option3"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Corect Answer "
+        android:id="@+id/quiz_corect_Answer"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_corect_Answer"
+        android:text="Add"
+        android:textAllCaps="false"
+        android:id="@+id/quiz_buttion_add"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/quiz_question_recyclarView"
+        android:layout_below="@+id/quiz_buttion_add"/>
+
+
+</RelativeLayout>

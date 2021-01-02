@@ -33,6 +33,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.firebase:firebase-database:19.4.0'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.3.1'
+    implementation 'androidx.navigation:navigation-ui:2.3.1'
     testImplementation 'junit:junit:4.12'
     // circular imageview
     implementation 'de.hdodenhof:circleimageview:3.0.0'
@@ -64,6 +67,10 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'me.biubiubiu.justifytext:library:1.1'
+
+    //cloud Message
+
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
 
 
 

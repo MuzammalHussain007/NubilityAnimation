@@ -29,13 +29,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <EditText
-                    android:layout_width="350dp"
+                    android:layout_width="300dp"
                     android:layout_height="40dp"
-                    android:padding="3dp"
+                    android:padding="6dp"
                     android:hint="Enter Your Message"
                     android:textColorHint="@color/colorlorgrey"
                     android:paddingLeft="20dp"
-                    android:background="@drawable/background_round"
+                    android:background="@drawable/round_shape"
                     android:id="@+id/user_messagae"
                     />
                 <ImageButton

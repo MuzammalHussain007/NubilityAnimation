@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.nubilityanimation.Adapter.AdminFragmentAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Fragments.Add_Admin_User_Product_Fragment;
+import com.example.nubilityanimation.Fragments.Add_topic_fragment;
 import com.example.nubilityanimation.Fragments.UserVideo;
 import com.example.nubilityanimation.R;
 import com.example.nubilityanimation.Registration.LoginActivity;
@@ -36,6 +37,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         connection();
         mAdminFragmentAdapter.addFragment(new UserVideo(),"UserVideo");
         mAdminFragmentAdapter.addFragment(new Add_Admin_User_Product_Fragment(),"Add Product");
+        mAdminFragmentAdapter.addFragment(new Add_topic_fragment(),"Add/Show Topic");
 
         mViewPager.setAdapter(mAdminFragmentAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

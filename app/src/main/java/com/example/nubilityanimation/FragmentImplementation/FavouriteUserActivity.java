@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nubilityanimation.Adapter.FavouriteAdapter;
@@ -18,6 +19,7 @@ import com.example.nubilityanimation.Interface.RecyclarViewInterface;
 import com.example.nubilityanimation.Modal.User_Favourite;
 import com.example.nubilityanimation.R;
 import com.example.nubilityanimation.UserSide.UserHomeActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +33,7 @@ public class FavouriteUserActivity extends AppCompatActivity implements Recyclar
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabaseReference;
     private List<User_Favourite> mUserFavourites;
+    private ItemTouchHelper.SimpleCallback itemTouchHelperCallback;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -59,11 +62,12 @@ public class FavouriteUserActivity extends AppCompatActivity implements Recyclar
         actionBar.setDisplayShowHomeEnabled(true);
         init();
         mRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
-        mDatabaseReference.addChildEventListener(new ChildEventListener() {
+        mDatabaseReference.child(FirebaseAuth.getInstance().getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                User_Favourite user_favourite = snapshot.getValue(User_Favourite.class);
                mUserFavourites.add(user_favourite);
+               new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
                mRecyclerView.setAdapter(new FavouriteAdapter(mUserFavourites,getApplicationContext(),FavouriteUserActivity.this));
 
             }
@@ -88,6 +92,21 @@ public class FavouriteUserActivity extends AppCompatActivity implements Recyclar
 
             }
         });
+
+        itemTouchHelperCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+              int position = viewHolder.getAdapterPosition();
+              mDatabaseReference.child(FirebaseAuth.getInstance().getUid()).child(mUserFavourites.get(position).getVideoId()).removeValue();
+
+
+            }
+        };
 
     }
 

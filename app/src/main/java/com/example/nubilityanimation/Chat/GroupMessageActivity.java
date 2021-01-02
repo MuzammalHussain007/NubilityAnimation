@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nubilityanimation.Adapter.MessageAdapter;
 import com.example.nubilityanimation.Constant.ConstantClass;
 import com.example.nubilityanimation.Modal.MessageClass;
+import com.example.nubilityanimation.Quiz.Topic_Activity;
 import com.example.nubilityanimation.R;
 import com.example.nubilityanimation.UserSide.UserHomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,12 +52,24 @@ public class GroupMessageActivity extends AppCompatActivity {
     String userName,dateString;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.quiz_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId())
         {
             case android.R.id.home :
             {
                 startActivity(new Intent(GroupMessageActivity.this, UserHomeActivity.class));
+                break;
+            }
+            case R.id.start_quiz_btn:
+            {
+                startActivity(new Intent(GroupMessageActivity.this, Topic_Activity.class));
                 break;
             }
         }

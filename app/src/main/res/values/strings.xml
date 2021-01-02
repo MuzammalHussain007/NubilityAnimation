@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nobility Animation</string>
+    <string name="app_name">Nobility Animations</string>
     <string name="firstname">FirstName</string>
     <string name="lastname">LastName</string>
     <string name="firstname_here">Enter FirstName Here</string>
@@ -14,4 +14,13 @@
     <string name="confirm_password_here">Enter Confirm Password Here</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_topic_">Topic_Activity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
